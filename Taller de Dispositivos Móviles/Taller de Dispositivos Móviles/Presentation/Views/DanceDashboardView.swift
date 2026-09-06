@@ -3,10 +3,12 @@ import SwiftUI
 struct DanceDashboardView: View {
     @StateObject private var viewModel: DanceDashboardViewModel
 
+    /// Función de inicialización empleada para recibir el ViewModel encargado de los datos y acciones de seguimiento.
     init(viewModel: DanceDashboardViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
+    /// Propiedad empleada para definir la interfaz de clases, asistencia, progreso, retroalimentación y registros audiovisuales.
     var body: some View {
         NavigationStack {
             List {
@@ -223,6 +225,7 @@ struct DanceDashboardView: View {
         }
     }
 
+    /// Función empleada para construir los encabezados visuales reutilizados en cada sección del seguimiento.
     private func sectionHeader(_ title: String, icon: String) -> some View {
         Label(title, systemImage: icon)
             .font(.subheadline.weight(.semibold))
@@ -230,6 +233,7 @@ struct DanceDashboardView: View {
             .textCase(nil)
     }
 
+    /// Función empleada para mostrar una línea de retroalimentación con un título y su observación correspondiente.
     private func feedbackLine(_ title: String, _ value: String) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: 5) {
             Text("\(title):")
@@ -241,6 +245,7 @@ struct DanceDashboardView: View {
         .font(.subheadline)
     }
 
+    /// Función empleada para seleccionar el color que representa visualmente cada estado de asistencia.
     private func attendanceColor(for status: AttendanceStatus?) -> Color {
         switch status {
         case .some(.attended):
@@ -257,6 +262,7 @@ struct DanceDashboardView: View {
     }
 }
 
+// Previsualización empleada para revisar la vista directamente desde Xcode.
 #Preview {
     let studentRepository = StudentRepositoryImpl(
         localDataSource: LocalStudentDataSource(),

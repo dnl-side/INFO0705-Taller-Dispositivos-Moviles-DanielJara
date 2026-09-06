@@ -9,6 +9,7 @@ struct StudentProgress: Identifiable, Equatable {
     let summary: String
     let recordedAt: Date
 
+    /// Función de inicialización empleada para crear un registro de progreso y validar la semana y las horas de entrenamiento.
     init(
         id: UUID = UUID(),
         studentID: UUID,

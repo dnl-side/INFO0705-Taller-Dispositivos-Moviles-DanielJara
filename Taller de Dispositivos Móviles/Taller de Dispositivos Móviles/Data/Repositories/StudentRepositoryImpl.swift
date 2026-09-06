@@ -2,6 +2,7 @@ final class StudentRepositoryImpl: StudentRepository {
     private let localDataSource: LocalStudentDataSource
     private let remoteDataSource: RemoteStudentDataSource
 
+    /// Función de inicialización empleada para recibir las fuentes de datos local y remota utilizadas por el repositorio.
     init(
         localDataSource: LocalStudentDataSource,
         remoteDataSource: RemoteStudentDataSource
@@ -10,6 +11,7 @@ final class StudentRepositoryImpl: StudentRepository {
         self.remoteDataSource = remoteDataSource
     }
 
+    /// Función empleada para obtener estudiantes desde la fuente remota y usar la copia local si la operación falla.
     func getStudents() async throws -> [Student] {
         let cachedStudents = localDataSource.getStudents()
 

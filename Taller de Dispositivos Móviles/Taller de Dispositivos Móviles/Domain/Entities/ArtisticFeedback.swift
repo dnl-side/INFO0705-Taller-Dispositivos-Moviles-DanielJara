@@ -11,6 +11,7 @@ struct ArtisticFeedback: Identifiable, Equatable {
     let expressiveNote: String
     let syncState: SyncState
 
+    /// Función de inicialización empleada para crear una retroalimentación artística con observaciones técnicas y expresivas.
     init(
         id: UUID = UUID(),
         studentID: UUID,

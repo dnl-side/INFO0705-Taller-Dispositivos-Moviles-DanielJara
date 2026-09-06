@@ -8,6 +8,7 @@ struct DanceClass: Identifiable, Equatable {
     let teacherID: UUID
     let schedule: String
 
+    /// Función de inicialización empleada para crear una clase de danza y validar que su duración sea mayor a cero.
     init(
         id: UUID = UUID(),
         discipline: String,

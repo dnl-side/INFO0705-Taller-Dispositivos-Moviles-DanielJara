@@ -9,10 +9,12 @@ final class StudentListViewModel: ObservableObject {
 
     private let repository: StudentRepository
 
+    /// Función de inicialización empleada para recibir la abstracción del repositorio utilizada por la lista de estudiantes.
     init(repository: StudentRepository) {
         self.repository = repository
     }
 
+    /// Función empleada para cargar la lista de estudiantes y actualizar los estados de carga y error de la interfaz.
     func loadStudents() async {
         guard !isLoading else { return }
 

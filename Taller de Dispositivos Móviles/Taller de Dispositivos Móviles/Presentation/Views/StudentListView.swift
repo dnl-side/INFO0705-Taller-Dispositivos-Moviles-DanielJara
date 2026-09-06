@@ -3,10 +3,12 @@ import SwiftUI
 struct StudentListView: View {
     @StateObject private var viewModel: StudentListViewModel
 
+    /// Función de inicialización empleada para recibir el ViewModel que administra los datos de la lista de estudiantes.
     init(viewModel: StudentListViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
+    /// Propiedad empleada para definir la interfaz de la lista según sus estados de carga, error y contenido disponible.
     var body: some View {
         NavigationStack {
             ZStack {
@@ -85,6 +87,7 @@ struct StudentListView: View {
         }
     }
 
+    /// Función empleada para asignar un color visual a cada nivel técnico del estudiante.
     private func levelColor(for level: TechnicalLevel) -> Color {
         switch level {
         case .initial:
@@ -97,6 +100,7 @@ struct StudentListView: View {
     }
 }
 
+// Previsualización empleada para revisar la vista directamente desde Xcode.
 #Preview {
     let repository = StudentRepositoryImpl(
         localDataSource: LocalStudentDataSource(),

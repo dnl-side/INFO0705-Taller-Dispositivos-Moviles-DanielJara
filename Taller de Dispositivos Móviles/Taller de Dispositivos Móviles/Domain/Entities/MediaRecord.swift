@@ -9,6 +9,7 @@ struct MediaRecord: Identifiable, Equatable {
     let tags: [String]
     let syncState: SyncState
 
+    /// Función de inicialización empleada para crear un registro audiovisual con su archivo, etiquetas y estado de sincronización.
     init(
         id: UUID = UUID(),
         classID: UUID,
