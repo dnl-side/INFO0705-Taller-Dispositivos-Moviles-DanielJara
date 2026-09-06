@@ -66,4 +66,26 @@ enum DanceSampleData {
             summary: "Mejoró el control de centro."
         )
     ]
+
+    static let feedback: [ArtisticFeedback] = [
+        ArtisticFeedback(
+            studentID: camilaID,
+            classID: jazzClassID,
+            technicalCorrection: "Mantener el eje durante la pirueta.",
+            projectionNote: "Proyectar la mirada antes del giro.",
+            postureNote: "Evitar elevar los hombros.",
+            expressiveNote: "Dar continuidad al movimiento entre frases.",
+            syncState: .synced
+        )
+    ]
+
+    static let media: [MediaRecord] = [
+        MediaRecord(
+            classID: jazzClassID,
+            studentID: camilaID,
+            localFileName: "jazz_semana_10_camila.mov",
+            tags: ["piruetas", "equilibrio", "semana 10"],
+            syncState: .synced
+        )
+    ]
 }
