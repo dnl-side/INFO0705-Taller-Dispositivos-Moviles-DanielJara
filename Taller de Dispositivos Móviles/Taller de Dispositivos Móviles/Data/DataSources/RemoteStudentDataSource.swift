@@ -18,11 +18,6 @@ final class RemoteStudentDataSource {
             throw RemoteStudentDataSourceError.unavailable
         }
 
-        return [
-            Student(name: "Camila Soto", technicalLevel: .intermediate),
-            Student(name: "Martín Rojas", technicalLevel: .advanced),
-            Student(name: "Sofía Pérez", technicalLevel: .initial),
-            Student(name: "Valentina Díaz", technicalLevel: .intermediate)
-        ]
+        return DanceSampleData.students
     }
 }

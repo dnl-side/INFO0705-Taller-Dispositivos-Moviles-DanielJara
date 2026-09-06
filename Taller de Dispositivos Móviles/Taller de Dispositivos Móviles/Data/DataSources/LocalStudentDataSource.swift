@@ -1,9 +1,5 @@
 final class LocalStudentDataSource {
-    private var students: [Student] = [
-        Student(name: "Camila Soto", technicalLevel: .intermediate),
-        Student(name: "Martín Rojas", technicalLevel: .advanced),
-        Student(name: "Sofía Pérez", technicalLevel: .initial)
-    ]
+    private var students: [Student] = Array(DanceSampleData.students.prefix(3))
 
     func getStudents() -> [Student] {
         students
