@@ -1,6 +1,6 @@
 import Foundation
 
-enum AttendanceStatus: String, CaseIterable, Equatable {
+enum AttendanceStatus: String, CaseIterable, Hashable {
     case attended = "Asistió"
     case late = "Atraso"
     case absent = "Ausente"
