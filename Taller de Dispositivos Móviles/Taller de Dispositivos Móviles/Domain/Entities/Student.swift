@@ -6,6 +6,7 @@ struct Student: Identifiable, Equatable {
     let technicalLevel: TechnicalLevel
     let classHistory: [UUID]
 
+    /// Función de inicialización empleada para crear un estudiante con su identidad, nivel técnico e historial de clases.
     init(
         id: UUID = UUID(),
         name: String,

@@ -17,6 +17,7 @@ struct AttendanceRecord: Identifiable, Equatable {
     let note: String?
     let syncState: SyncState
 
+    /// Función de inicialización empleada para crear un registro de asistencia con su estado y condición de sincronización.
     init(
         id: UUID = UUID(),
         studentID: UUID,
@@ -35,6 +36,7 @@ struct AttendanceRecord: Identifiable, Equatable {
         self.syncState = syncState
     }
 
+    /// Función empleada para generar una copia del registro marcada como sincronizada.
     func markingSynced() -> AttendanceRecord {
         AttendanceRecord(
             id: id,

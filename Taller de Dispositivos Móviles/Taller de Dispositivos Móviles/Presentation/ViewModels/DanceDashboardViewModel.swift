@@ -15,6 +15,7 @@ final class DanceDashboardViewModel: ObservableObject {
     private let studentRepository: StudentRepository
     private let danceRepository: DanceRepository
 
+    /// Función de inicialización empleada para recibir los repositorios que abastecen la información mostrada en seguimiento.
     init(
         studentRepository: StudentRepository,
         danceRepository: DanceRepository
@@ -23,10 +24,12 @@ final class DanceDashboardViewModel: ObservableObject {
         self.danceRepository = danceRepository
     }
 
+    /// Propiedad empleada para obtener la primera clase disponible y utilizarla como clase activa del seguimiento.
     var currentClass: DanceClass? {
         classes.first
     }
 
+    /// Función empleada para cargar estudiantes, clases, asistencia, progreso, retroalimentación y registros audiovisuales.
     func loadDashboard() async {
         guard !isLoading else { return }
 
@@ -59,10 +62,12 @@ final class DanceDashboardViewModel: ObservableObject {
         }
     }
 
+    /// Función empleada para consultar el estado de asistencia actualmente registrado para un estudiante.
     func attendanceStatus(for student: Student) -> AttendanceStatus? {
         attendance.first(where: { $0.studentID == student.id })?.status
     }
 
+    /// Función empleada para registrar una asistencia y actualizar la información visible después de guardarla.
     func setAttendance(_ status: AttendanceStatus, for student: Student) async {
         guard let currentClass else { return }
 
@@ -81,6 +86,7 @@ final class DanceDashboardViewModel: ObservableObject {
         }
     }
 
+    /// Función empleada para solicitar la sincronización de asistencias pendientes y refrescar los datos de la clase activa.
     func synchronize() async {
         await danceRepository.synchronizePendingAttendance()
 

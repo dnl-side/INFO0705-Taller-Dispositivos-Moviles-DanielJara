@@ -4,6 +4,7 @@ struct DanceSchoolView: View {
     private let studentViewModel: StudentListViewModel
     private let dashboardViewModel: DanceDashboardViewModel
 
+    /// Función de inicialización empleada para recibir los ViewModels utilizados por las dos secciones principales de la aplicación.
     init(
         studentViewModel: StudentListViewModel,
         dashboardViewModel: DanceDashboardViewModel
@@ -12,6 +13,7 @@ struct DanceSchoolView: View {
         self.dashboardViewModel = dashboardViewModel
     }
 
+    /// Propiedad empleada para definir la navegación principal mediante las pestañas de estudiantes y seguimiento.
     var body: some View {
         TabView {
             StudentListView(viewModel: studentViewModel)

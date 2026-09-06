@@ -6,6 +6,7 @@ struct Teacher: Identifiable, Equatable {
     let specialty: String
     let availableSchedules: [String]
 
+    /// Función de inicialización empleada para crear un profesor con su especialidad y horarios disponibles.
     init(
         id: UUID = UUID(),
         name: String,
