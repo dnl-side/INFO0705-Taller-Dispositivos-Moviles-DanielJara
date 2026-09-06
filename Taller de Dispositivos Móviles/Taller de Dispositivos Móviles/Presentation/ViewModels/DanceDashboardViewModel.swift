@@ -7,6 +7,8 @@ final class DanceDashboardViewModel: ObservableObject {
     @Published private(set) var classes: [DanceClass] = []
     @Published private(set) var attendance: [AttendanceRecord] = []
     @Published private(set) var progress: [StudentProgress] = []
+    @Published private(set) var feedback: [ArtisticFeedback] = []
+    @Published private(set) var media: [MediaRecord] = []
     @Published private(set) var isLoading = false
     @Published private(set) var statusMessage: String?
 
@@ -41,6 +43,7 @@ final class DanceDashboardViewModel: ObservableObject {
 
             if let currentClass {
                 attendance = await danceRepository.getAttendance(for: currentClass.id)
+                media = await danceRepository.getMedia(for: currentClass.id)
             }
 
             if let student = students.first,
@@ -49,6 +52,7 @@ final class DanceDashboardViewModel: ObservableObject {
                     for: student.id,
                     discipline: currentClass.discipline
                 )
+                feedback = await danceRepository.getFeedback(for: student.id)
             }
         } catch {
             statusMessage = "No fue posible actualizar todos los datos. Se mostrará la información disponible localmente."
