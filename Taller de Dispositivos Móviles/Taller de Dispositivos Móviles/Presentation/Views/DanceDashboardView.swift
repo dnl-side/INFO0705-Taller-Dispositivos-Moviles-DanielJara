@@ -83,6 +83,43 @@ struct DanceDashboardView: View {
                         }
                     }
                 }
+
+                Section("Retroalimentación artística") {
+                    if viewModel.feedback.isEmpty {
+                        Text("Sin retroalimentación registrada.")
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ForEach(viewModel.feedback) { feedback in
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(feedback.technicalCorrection)
+                                    .font(.headline)
+                                Text("Proyección: \(feedback.projectionNote)")
+                                Text("Postura: \(feedback.postureNote)")
+                                Text("Expresión: \(feedback.expressiveNote)")
+                            }
+                            .font(.subheadline)
+                            .padding(.vertical, 4)
+                        }
+                    }
+                }
+
+                Section("Registro audiovisual") {
+                    if viewModel.media.isEmpty {
+                        Text("Sin registros audiovisuales descargados.")
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ForEach(viewModel.media) { media in
+                            VStack(alignment: .leading, spacing: 4) {
+                                Label(media.localFileName, systemImage: "video")
+                                    .font(.headline)
+                                Text(media.tags.joined(separator: " · "))
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                }
             }
             .navigationTitle("Seguimiento")
             .toolbar {
