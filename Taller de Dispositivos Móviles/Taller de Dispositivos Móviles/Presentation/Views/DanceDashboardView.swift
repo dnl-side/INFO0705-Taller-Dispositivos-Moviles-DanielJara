@@ -243,15 +243,15 @@ struct DanceDashboardView: View {
 
     private func attendanceColor(for status: AttendanceStatus?) -> Color {
         switch status {
-        case .attended:
+        case .some(.attended):
             AutumnTheme.moss
-        case .late:
+        case .some(.late):
             AutumnTheme.goldenLeaf
-        case .absent:
+        case .some(.absent):
             AutumnTheme.maple
-        case .injury, .medicalObservation:
+        case .some(.injury), .some(.medicalObservation):
             AutumnTheme.persimmon
-        case nil:
+        case .none:
             AutumnTheme.secondaryText
         }
     }
