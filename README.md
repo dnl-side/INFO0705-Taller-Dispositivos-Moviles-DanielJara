@@ -12,6 +12,15 @@ iOS
 - SwiftUI
 - Xcode
 
-## Alcance
+## Arquitectura
 
-Desarrollo de una aplicación móvil orientada a la aplicación de arquitecturas, patrones de diseño y buenas prácticas de desarrollo móvil.
+La aplicación se organiza en capas lógicas basadas en MVVM y Clean Architecture:
+
+- `App`: composición e inyección de dependencias.
+- `Presentation`: vistas y ViewModels.
+- `Domain`: entidades y contratos de repositorio.
+- `Data`: implementación de repositorios y fuentes de datos.
+
+## Alcance actual
+
+Implementación base del patrón Repository para consultar estudiantes, coordinando una fuente local en memoria y una fuente remota simulada. La capa de presentación depende de la abstracción definida en `Domain` y no de la implementación concreta del repositorio.
