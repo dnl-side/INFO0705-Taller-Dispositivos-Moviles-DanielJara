@@ -24,5 +24,9 @@ struct DanceSchoolView: View {
                     Label("Seguimiento", systemImage: "chart.line.uptrend.xyaxis")
                 }
         }
+        .tint(AutumnTheme.maple)
+        .toolbarBackground(AutumnTheme.surface, for: .tabBar)
+        .toolbarBackground(.visible, for: .tabBar)
+        .preferredColorScheme(.light)
     }
 }
