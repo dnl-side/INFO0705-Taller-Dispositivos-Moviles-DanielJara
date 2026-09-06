@@ -4,6 +4,8 @@ final class LocalDanceDataSource {
     private var classes: [DanceClass] = DanceSampleData.classes
     private var attendanceRecords: [AttendanceRecord] = []
     private var progressRecords: [StudentProgress] = DanceSampleData.progress
+    private var feedbackRecords: [ArtisticFeedback] = DanceSampleData.feedback
+    private var mediaRecords: [MediaRecord] = DanceSampleData.media
 
     func getClasses() -> [DanceClass] {
         classes
@@ -53,5 +55,13 @@ final class LocalDanceDataSource {
         for item in progress where !progressRecords.contains(where: { $0.id == item.id }) {
             progressRecords.append(item)
         }
+    }
+
+    func getFeedback(for studentID: UUID) -> [ArtisticFeedback] {
+        feedbackRecords.filter { $0.studentID == studentID }
+    }
+
+    func getMedia(for classID: UUID) -> [MediaRecord] {
+        mediaRecords.filter { $0.classID == classID }
     }
 }
