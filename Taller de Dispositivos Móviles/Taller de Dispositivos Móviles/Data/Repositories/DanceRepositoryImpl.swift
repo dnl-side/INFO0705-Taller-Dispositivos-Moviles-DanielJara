@@ -65,6 +65,14 @@ final class DanceRepositoryImpl: DanceRepository {
         }
     }
 
+    func getFeedback(for studentID: UUID) async -> [ArtisticFeedback] {
+        localDataSource.getFeedback(for: studentID)
+    }
+
+    func getMedia(for classID: UUID) async -> [MediaRecord] {
+        localDataSource.getMedia(for: classID)
+    }
+
     func synchronizePendingAttendance() async {
         for record in localDataSource.pendingAttendance() {
             do {
