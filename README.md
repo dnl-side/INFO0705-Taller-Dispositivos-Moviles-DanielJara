@@ -19,8 +19,8 @@ La aplicación se organiza en capas lógicas basadas en MVVM y Clean Architectur
 - `App`: composición e inyección de dependencias.
 - `Presentation`: vistas y ViewModels.
 - `Domain`: entidades y contratos de repositorio.
-- `Data`: implementación de repositorios y fuentes de datos.
+- `Data`: implementación de repositorios, caché local y fuentes remotas simuladas.
 
 ## Alcance actual
 
-Implementación base del patrón Repository para consultar estudiantes, coordinando una fuente local en memoria y una fuente remota simulada. La capa de presentación depende de la abstracción definida en `Domain` y no de la implementación concreta del repositorio.
+Base funcional para la gestión de una escuela de danza. Incluye consulta de estudiantes, clases, registro de asistencia, seguimiento de progreso, retroalimentación artística y modelo para registros audiovisuales. El acceso a datos se realiza mediante Repository, con soporte para caché local, simulación remota y sincronización de asistencia pendiente.
