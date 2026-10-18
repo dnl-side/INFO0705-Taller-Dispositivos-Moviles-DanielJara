@@ -1,0 +1,81 @@
+enum AcademicSampleData {
+    static let resources: [AcademicResource] = [
+        AcademicResource(
+            category: .evaluations,
+            title: "Evaluaciones y calificaciones",
+            summary: "Orientación general para consultar evaluaciones, resultados y actividades académicas.",
+            steps: [
+                "Ingresar al entorno académico correspondiente.",
+                "Revisar la asignatura o actividad que deseas consultar.",
+                "Si falta información, utilizar el canal académico definido para la asignatura."
+            ],
+            channel: "Entorno académico"
+        ),
+        AcademicResource(
+            category: .enrollment,
+            title: "Matrícula",
+            summary: "Orientación general para consultas relacionadas con inscripción, continuidad y procesos de matrícula.",
+            steps: [
+                "Revisar el estado del proceso académico.",
+                "Confirmar si existen antecedentes o documentos pendientes.",
+                "Contactar el canal institucional correspondiente si necesitas asistencia."
+            ],
+            channel: "Servicios estudiantiles"
+        ),
+        AcademicResource(
+            category: .certificates,
+            title: "Certificados y documentos",
+            summary: "Orientación para solicitudes de certificados y documentación académica.",
+            steps: [
+                "Identificar el certificado o documento requerido.",
+                "Revisar la opción de solicitud disponible en los servicios académicos.",
+                "Confirmar el estado de la solicitud antes de realizar una nueva."
+            ],
+            channel: "Servicios académicos"
+        ),
+        AcademicResource(
+            category: .finance,
+            title: "Finanzas estudiantiles",
+            summary: "Orientación para consultas relacionadas con pagos, aranceles y antecedentes financieros.",
+            steps: [
+                "Revisar el detalle del concepto consultado.",
+                "Verificar fechas y estado de los pagos registrados.",
+                "Usar el canal financiero institucional cuando sea necesaria una revisión."
+            ],
+            channel: "Área financiera"
+        ),
+        AcademicResource(
+            category: .technicalSupport,
+            title: "Soporte técnico",
+            summary: "Orientación inicial para problemas de acceso o funcionamiento de servicios digitales.",
+            steps: [
+                "Comprobar la conexión y volver a iniciar la sesión.",
+                "Registrar el mensaje de error si el problema continúa.",
+                "Contactar soporte incluyendo el servicio afectado y una descripción breve."
+            ],
+            channel: "Mesa de ayuda"
+        ),
+        AcademicResource(
+            category: .academicSupport,
+            title: "Acompañamiento académico",
+            summary: "Orientación para dudas sobre avance académico, apoyo y acompañamiento formativo.",
+            steps: [
+                "Identificar la asignatura o proceso en el que necesitas apoyo.",
+                "Revisar los canales de acompañamiento disponibles.",
+                "Entregar contexto suficiente para que la consulta pueda ser derivada correctamente."
+            ],
+            channel: "Acompañamiento estudiantil"
+        ),
+        AcademicResource(
+            category: .library,
+            title: "Biblioteca y recursos",
+            summary: "Orientación para localizar bibliografía, material de estudio y otros recursos académicos.",
+            steps: [
+                "Definir el recurso o tema que necesitas consultar.",
+                "Buscarlo en los servicios bibliográficos disponibles.",
+                "Solicitar orientación bibliográfica si no encuentras el material."
+            ],
+            channel: "Biblioteca"
+        )
+    ]
+}
