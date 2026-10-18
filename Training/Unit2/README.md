@@ -26,7 +26,7 @@ Taller de Dispositivos Móviles/
     └── Unit2/
         └── Data/
             └── Models/
-                └── AcademicQueryClassifier.mlmodel
+                └── AcademicQueryClassifierV2.mlmodel
 ```
 
 Al volver a abrir Xcode, el modelo queda dentro del grupo sincronizado del proyecto. La aplicación intenta cargarlo automáticamente y utiliza el clasificador preliminar solo cuando el modelo no está disponible.
@@ -34,7 +34,7 @@ Al volver a abrir Xcode, el modelo queda dentro del grupo sincronizado del proye
 
 ## Evaluación directa del modelo
 
-Para comprobar el archivo `AcademicQueryClassifier.mlmodel` recién generado sin depender de la caché de Xcode o del Simulator:
+Para comprobar el archivo `AcademicQueryClassifierV2.mlmodel` recién generado sin depender de la caché de Xcode o del Simulator:
 
 ```bash
 xcrun swift Training/Unit2/evaluate_academic_classifier.swift

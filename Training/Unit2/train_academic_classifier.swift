@@ -18,7 +18,7 @@ let outputDirectory = repositoryRoot
     .appendingPathComponent("Models")
 
 let outputURL = outputDirectory
-    .appendingPathComponent("AcademicQueryClassifier.mlmodel")
+    .appendingPathComponent("AcademicQueryClassifierV2.mlmodel")
 
 try FileManager.default.createDirectory(
     at: outputDirectory,
@@ -65,7 +65,7 @@ print(String(format: "Challenge accuracy: %.2f %%", challengeAccuracy))
 let metadata = MLModelMetadata(
     author: "Daniel Jara",
     shortDescription: "Clasificador local de consultas académicas para UNIACC Orienta.",
-    version: "1.1"
+    version: "1.2"
 )
 
 try classifier.write(to: outputURL, metadata: metadata)
