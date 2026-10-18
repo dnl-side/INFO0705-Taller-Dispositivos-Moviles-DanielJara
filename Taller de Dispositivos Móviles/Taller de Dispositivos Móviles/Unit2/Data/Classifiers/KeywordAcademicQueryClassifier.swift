@@ -9,38 +9,51 @@ final class KeywordAcademicQueryClassifier: AcademicQueryClassifying {
     let usesCoreML = false
 
     private let keywords: [AcademicCategory: [String]] = [
-        .evaluations: ["evaluacion", "evaluaciones", "nota", "notas", "calificacion", "prueba", "examen"],
-        .enrollment: ["matricula", "matricular", "inscripcion", "inscribir", "continuidad"],
-        .certificates: ["certificado", "certificados", "documento", "constancia", "alumno regular"],
-        .finance: ["pago", "pagos", "arancel", "cuota", "deuda", "finanzas"],
-        .technicalSupport: ["error", "acceso", "entrar", "clave", "contrasena", "plataforma", "soporte", "aula virtual"],
-        .academicSupport: ["ayuda academica", "acompanamiento", "tutor", "orientacion", "asignatura"],
-        .library: ["biblioteca", "libro", "libros", "bibliografia", "recurso", "articulo"]
+        .evaluations: ["evaluacion", "evaluaciones", "nota", "notas", "calificacion", "calificaciones", "prueba", "examen", "puntaje", "promedio"],
+        .enrollment: ["matricula", "matricular", "matricularme", "inscripcion", "inscribir", "inscribirme", "continuidad"],
+        .certificates: ["certificado", "certificados", "constancia", "alumno regular"],
+        .finance: ["pago", "pagos", "pagar", "arancel", "cuota", "cuotas", "deuda", "finanzas", "cobro"],
+        .technicalSupport: ["error", "acceso", "entrar", "clave", "contrasena", "plataforma", "soporte", "aula virtual", "portal"],
+        .academicSupport: ["ayuda academica", "acompanamiento", "tutor", "orientacion", "apoyo academico"],
+        .library: ["biblioteca", "libro", "libros", "bibliografia", "articulo", "articulos"]
     ]
 
     /// Función empleada como respaldo cuando el modelo CoreML todavía no se encuentra incorporado al proyecto.
     func classify(query: String) async throws -> AcademicClassification {
-        let normalizedQuery = query
-            .folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
-            .lowercased()
-            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let normalizedQuery = AcademicQueryNormalizer.normalize(query)
 
         guard !normalizedQuery.isEmpty else {
             throw AcademicQueryClassifierError.emptyQuery
         }
 
-        let scores = keywords.mapValues { words in
-            words.reduce(0) { partialResult, word in
-                partialResult + (normalizedQuery.contains(word) ? 1 : 0)
+        let paddedQuery = " \(normalizedQuery) "
+
+        let ranking = AcademicCategory.allCases
+            .map { category -> (category: AcademicCategory, score: Int) in
+                let score = (keywords[category] ?? []).reduce(0) { partialResult, word in
+                    partialResult + (paddedQuery.contains(" \(word) ") ? 1 : 0)
+                }
+                return (category, score)
             }
+            .filter { $0.score > 0 }
+            .sorted { $0.score > $1.score }
+
+        guard let best = ranking.first else {
+            return AcademicClassification(
+                category: .academicSupport,
+                confidence: 0,
+                isReliable: false
+            )
         }
 
-        if let bestMatch = scores.max(by: { $0.value < $1.value }),
-           bestMatch.value > 0 {
-            let confidence = min(0.55 + (Double(bestMatch.value) * 0.12), 0.91)
-            return AcademicClassification(category: bestMatch.key, confidence: confidence)
-        }
+        let isTied = ranking.dropFirst().first?.score == best.score
+        let confidence = min(0.55 + (Double(best.score) * 0.12), 0.91)
 
-        return AcademicClassification(category: .academicSupport, confidence: 0.40)
+        return AcademicClassification(
+            category: best.category,
+            confidence: confidence,
+            alternatives: ranking.dropFirst().prefix(2).map { $0.category },
+            isReliable: !isTied
+        )
     }
 }

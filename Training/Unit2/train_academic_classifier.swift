@@ -3,6 +3,22 @@ import Foundation
 import NaturalLanguage
 import TabularData
 
+/// Función empleada para normalizar el texto igual que `AcademicQueryNormalizer` en la aplicación.
+func normalizeQuery(_ text: String) -> String {
+    let folded = text
+        .precomposedStringWithCanonicalMapping
+        .folding(
+            options: [.diacriticInsensitive, .caseInsensitive],
+            locale: Locale(identifier: "es_CL")
+        )
+        .lowercased()
+
+    return folded
+        .components(separatedBy: CharacterSet.alphanumerics.inverted)
+        .filter { !$0.isEmpty }
+        .joined(separator: " ")
+}
+
 let scriptURL = URL(fileURLWithPath: #filePath)
 let trainingDirectory = scriptURL.deletingLastPathComponent()
 let repositoryRoot = trainingDirectory
@@ -19,15 +35,19 @@ let outputDirectory = repositoryRoot
     .appendingPathComponent("Models")
 
 let outputURL = outputDirectory
-    .appendingPathComponent("AcademicQueryClassifierV3.mlmodel")
+    .appendingPathComponent("AcademicQueryClassifierV4.mlmodel")
 
 try FileManager.default.createDirectory(
     at: outputDirectory,
     withIntermediateDirectories: true
 )
 
-let data = try DataFrame(contentsOfCSVFile: dataURL)
-let challengeData = try DataFrame(contentsOfCSVFile: challengeURL)
+var data = try DataFrame(contentsOfCSVFile: dataURL)
+var challengeData = try DataFrame(contentsOfCSVFile: challengeURL)
+
+// El modelo se entrena con texto normalizado para que tildes, mayúsculas y signos no generen palabras desconocidas.
+try data.transformColumn("text") { (text: String) -> String in normalizeQuery(text) }
+try challengeData.transformColumn("text") { (text: String) -> String in normalizeQuery(text) }
 
 let (trainingData, testingData) = data.stratifiedSplit(
     on: "label",
@@ -73,7 +93,7 @@ print(String(format: "Challenge accuracy: %.2f %%", challengeAccuracy))
 let metadata = MLModelMetadata(
     author: "Daniel Jara",
     shortDescription: "Clasificador local de consultas académicas para UNIACC Orienta.",
-    version: "1.3"
+    version: "1.4"
 )
 
 try classifier.write(to: outputURL, metadata: metadata)
