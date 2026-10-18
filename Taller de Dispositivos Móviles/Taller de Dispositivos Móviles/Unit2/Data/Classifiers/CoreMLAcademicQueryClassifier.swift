@@ -6,12 +6,12 @@ enum CoreMLAcademicQueryClassifierError: Error {
 }
 
 final class CoreMLAcademicQueryClassifier: AcademicQueryClassifying {
-    private static let modelResourceName = "AcademicQueryClassifierV2"
+    private static let modelResourceName = "AcademicQueryClassifierV3"
 
     private let model: NLModel?
     private let fallback: AcademicQueryClassifying
 
-    /// Función de inicialización empleada para cargar la versión vigente del modelo CoreML desde los recursos de la aplicación.
+    /// Función de inicialización empleada para cargar la versión en español del modelo CoreML desde los recursos de la aplicación.
     init(
         bundle: Bundle = .main,
         fallback: AcademicQueryClassifying = KeywordAcademicQueryClassifier()
@@ -29,7 +29,7 @@ final class CoreMLAcademicQueryClassifier: AcademicQueryClassifying {
     }
 
     var engineName: String {
-        model == nil ? fallback.engineName : "CoreML on-device · v1.2"
+        model == nil ? fallback.engineName : "CoreML on-device · v1.3 ES"
     }
 
     var usesCoreML: Bool {

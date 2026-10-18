@@ -26,7 +26,7 @@ Taller de Dispositivos Móviles/
     └── Unit2/
         └── Data/
             └── Models/
-                └── AcademicQueryClassifierV2.mlmodel
+                └── AcademicQueryClassifierV3.mlmodel
 ```
 
 Al volver a abrir Xcode, el modelo queda dentro del grupo sincronizado del proyecto. La aplicación intenta cargarlo automáticamente y utiliza el clasificador preliminar solo cuando el modelo no está disponible.
@@ -34,7 +34,7 @@ Al volver a abrir Xcode, el modelo queda dentro del grupo sincronizado del proye
 
 ## Evaluación directa del modelo
 
-Para comprobar el archivo `AcademicQueryClassifierV2.mlmodel` recién generado sin depender de la caché de Xcode o del Simulator:
+Para comprobar el archivo `AcademicQueryClassifierV3.mlmodel` recién generado sin depender de la caché de Xcode o del Simulator:
 
 ```bash
 xcrun swift Training/Unit2/evaluate_academic_classifier.swift
@@ -49,3 +49,8 @@ xcrun swift Training/Unit2/evaluate_academic_classifier.swift "calificación" "q
 ```
 
 Esta evaluación es útil para distinguir entre un problema del modelo y un modelo anterior todavía compilado dentro de Xcode.
+
+
+## Idioma del modelo
+
+El corpus de UNIACC Orienta está escrito en español. El entrenamiento configura explícitamente `language: .spanish` en `MLTextClassifier.ModelParameters` para que el procesamiento lingüístico del modelo no dependa de la configuración regional del equipo o simulador.
