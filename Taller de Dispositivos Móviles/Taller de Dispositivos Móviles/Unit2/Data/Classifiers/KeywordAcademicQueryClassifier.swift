@@ -5,6 +5,9 @@ enum AcademicQueryClassifierError: Error {
 }
 
 final class KeywordAcademicQueryClassifier: AcademicQueryClassifying {
+    let engineName = "Clasificador preliminar"
+    let usesCoreML = false
+
     private let keywords: [AcademicCategory: [String]] = [
         .evaluations: ["evaluacion", "evaluaciones", "nota", "notas", "calificacion", "prueba", "examen"],
         .enrollment: ["matricula", "matricular", "inscripcion", "inscribir", "continuidad"],
@@ -15,7 +18,7 @@ final class KeywordAcademicQueryClassifier: AcademicQueryClassifying {
         .library: ["biblioteca", "libro", "libros", "bibliografia", "recurso", "articulo"]
     ]
 
-    /// Función empleada como clasificador preliminar para validar el flujo de la Unidad 2 antes de integrar CoreML.
+    /// Función empleada como respaldo cuando el modelo CoreML todavía no se encuentra incorporado al proyecto.
     func classify(query: String) async throws -> AcademicClassification {
         let normalizedQuery = query
             .folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)

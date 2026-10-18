@@ -5,7 +5,10 @@ final class Unit2DependencyContainer {
 
     /// Función de inicialización empleada para componer las dependencias de la Unidad 2.
     init() {
-        classifier = KeywordAcademicQueryClassifier()
+        classifier = CoreMLAcademicQueryClassifier(
+            fallback: KeywordAcademicQueryClassifier()
+        )
+
         resourceRepository = AcademicResourceRepositoryImpl(
             localDataSource: LocalAcademicResourceDataSource()
         )
