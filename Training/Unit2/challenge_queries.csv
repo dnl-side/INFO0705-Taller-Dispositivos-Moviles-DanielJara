@@ -1,0 +1,43 @@
+text,label
+"¿Ya publicaron la nota del último trabajo?",evaluations
+"Quiero saber el puntaje que obtuve ayer",evaluations
+"¿Puedo ver cómo me fue en el control?",evaluations
+"Necesito revisar la calificación de una entrega",evaluations
+"¿Cuál fue mi resultado en el examen final?",evaluations
+"Quiero consultar el promedio que llevo",evaluations
+"¿Cuándo tengo que inscribirme para el próximo semestre?",enrollment
+"Quiero comprobar que mi matrícula quedó activa",enrollment
+"¿Qué me falta para quedar inscrito?",enrollment
+"Necesito renovar mi condición de estudiante para el nuevo periodo",enrollment
+"¿Dónde confirmo que sigo matriculado?",enrollment
+"Tengo dudas con la inscripción de este semestre",enrollment
+"¿Cómo puedo acreditar que actualmente estudio aquí?",certificates
+"Me pidieron un documento que confirme que soy estudiante",certificates
+"Necesito un papel oficial para presentarlo en mi trabajo",certificates
+"¿Dónde obtengo una constancia de mis estudios?",certificates
+"Quiero un documento que certifique mi condición de alumno",certificates
+"Me solicitaron acreditar mi situación académica",certificates
+"Tengo un cobro y no sé si ya está pagado",finance
+"¿Cuánto me queda por pagar este semestre?",finance
+"Quiero comprobar que registraron la transferencia",finance
+"Necesito saber cuándo vence el próximo pago",finance
+"Hay un monto en mi cuenta que no entiendo",finance
+"¿Puedo revisar las cuotas que todavía debo?",finance
+"Mi contraseña funciona pero el aula no abre",technicalSupport
+"Intento entrar al portal y me rechaza el acceso",technicalSupport
+"La página se queda cargando y nunca inicia",technicalSupport
+"No logro abrir la plataforma desde el teléfono",technicalSupport
+"Mi usuario aparece bloqueado al iniciar sesión",technicalSupport
+"El campus virtual me muestra un fallo al entrar",technicalSupport
+"Estoy complicado con un ramo y necesito orientación",academicSupport
+"No sé cómo organizar la carga de este semestre",academicSupport
+"Quiero conversar con alguien sobre mi avance",academicSupport
+"Necesito apoyo porque estoy teniendo dificultades para estudiar",academicSupport
+"¿Con quién puedo hablar sobre mi situación académica?",academicSupport
+"Quiero recibir orientación para continuar con mis estudios",academicSupport
+"Necesito fuentes para investigar un tema de mi trabajo",library
+"¿Dónde encuentro artículos científicos sobre mi tema?",library
+"Busco libros digitales para preparar una investigación",library
+"Quiero acceder a bases de datos para encontrar bibliografía",library
+"Necesito literatura académica para fundamentar un informe",library
+"¿Cómo puedo encontrar publicaciones académicas?",library

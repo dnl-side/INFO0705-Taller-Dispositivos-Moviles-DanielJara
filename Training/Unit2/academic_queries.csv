@@ -192,6 +192,160 @@ text,label
 "¿Cómo encuentro una fuente académica?",library
 "Necesito consultar una referencia",library
 "¿Dónde están los libros digitales?",library
-"Quiero buscar bibliografía para una evaluación",library
+"Quiero buscar bibliografía para una investigación",library
 "Necesito apoyo para encontrar material académico",library
 "¿Cómo accedo a los recursos bibliográficos?",library
+"evaluación",evaluations
+"evaluaciones",evaluations
+"calificación",evaluations
+"calificaciones",evaluations
+"nota",evaluations
+"notas",evaluations
+"examen",evaluations
+"prueba",evaluations
+"resultado de evaluación",evaluations
+"resultado de examen",evaluations
+"resultado de prueba",evaluations
+"nota de la tarea",evaluations
+"calificación del trabajo",evaluations
+"puntaje obtenido",evaluations
+"puntaje de la prueba",evaluations
+"promedio de notas",evaluations
+"quiero ver mi calificación",evaluations
+"quiero consultar una nota",evaluations
+"ya publicaron mis notas",evaluations
+"necesito saber mi resultado",evaluations
+"cómo me fue en el examen",evaluations
+"quiero revisar mi puntaje",evaluations
+"matrícula",enrollment
+"matricularme",enrollment
+"inscripción",enrollment
+"inscribirme",enrollment
+"continuidad académica",enrollment
+"proceso de matrícula",enrollment
+"estado de matrícula",enrollment
+"matrícula vigente",enrollment
+"periodo de matrícula",enrollment
+"inscripción semestral",enrollment
+"quiero matricularme",enrollment
+"necesito inscribirme",enrollment
+"cómo sigo estudiando el próximo semestre",enrollment
+"quiero renovar mi inscripción",enrollment
+"tengo pendiente la matrícula",enrollment
+"confirmar matrícula",enrollment
+"fecha de inscripción",enrollment
+"estado de inscripción",enrollment
+"documentos para matrícula",enrollment
+"continuidad de estudios",enrollment
+"renovar matrícula",enrollment
+"matricular asignaturas",enrollment
+"certificado",certificates
+"certificados",certificates
+"constancia",certificates
+"documento académico",certificates
+"alumno regular",certificates
+"certificado de alumno regular",certificates
+"certificado de notas",certificates
+"constancia de estudios",certificates
+"documentación oficial",certificates
+"acreditar que estudio",certificates
+"acreditar que soy estudiante",certificates
+"necesito un certificado",certificates
+"quiero una constancia",certificates
+"solicitar documento",certificates
+"descargar certificado",certificates
+"emitir certificado",certificates
+"documento para un trámite",certificates
+"constancia académica",certificates
+"certificado para presentar",certificates
+"solicitud de certificado",certificates
+"documento de estudiante",certificates
+"acreditación de estudios",certificates
+"pago",finance
+"pagos",finance
+"arancel",finance
+"cuota",finance
+"deuda",finance
+"saldo pendiente",finance
+"monto a pagar",finance
+"fecha de pago",finance
+"historial de pagos",finance
+"cuota atrasada",finance
+"cobro",finance
+"cobros",finance
+"situación financiera",finance
+"valor del arancel",finance
+"pago pendiente",finance
+"confirmar pago",finance
+"deuda pendiente",finance
+"estado de cuenta",finance
+"quiero pagar una cuota",finance
+"cuánto tengo que pagar",finance
+"cuánto debo",finance
+"revisar mis pagos",finance
+"error de acceso",technicalSupport
+"soporte técnico",technicalSupport
+"contraseña",technicalSupport
+"clave",technicalSupport
+"no puedo entrar",technicalSupport
+"no puedo acceder",technicalSupport
+"problema de acceso",technicalSupport
+"aula virtual",technicalSupport
+"campus virtual",technicalSupport
+"portal no funciona",technicalSupport
+"error de plataforma",technicalSupport
+"problema con mi cuenta",technicalSupport
+"recuperar contraseña",technicalSupport
+"recuperar clave",technicalSupport
+"inicio de sesión",technicalSupport
+"plataforma caída",technicalSupport
+"no carga la página",technicalSupport
+"usuario bloqueado",technicalSupport
+"problema técnico",technicalSupport
+"no abre el aula",technicalSupport
+"error al ingresar",technicalSupport
+"necesito soporte",technicalSupport
+"ayuda académica",academicSupport
+"acompañamiento",academicSupport
+"orientación académica",academicSupport
+"tutor",academicSupport
+"apoyo académico",academicSupport
+"avance académico",academicSupport
+"rendimiento académico",academicSupport
+"problema con una asignatura",academicSupport
+"dificultad académica",academicSupport
+"organizar mis estudios",academicSupport
+"planificar mis estudios",academicSupport
+"apoyo estudiantil",academicSupport
+"acompañamiento estudiantil",academicSupport
+"necesito orientación",academicSupport
+"quiero hablar con un tutor",academicSupport
+"ayuda con mis estudios",academicSupport
+"no sé cómo seguir estudiando",academicSupport
+"necesito apoyo con una asignatura",academicSupport
+"problema académico",academicSupport
+"consultar por mi avance",academicSupport
+"apoyo para continuar",academicSupport
+"orientación sobre mis estudios",academicSupport
+"biblioteca",library
+"bibliografía",library
+"libro",library
+"libros",library
+"artículo académico",library
+"artículos científicos",library
+"fuente académica",library
+"fuentes académicas",library
+"base de datos académica",library
+"biblioteca digital",library
+"libros electrónicos",library
+"material bibliográfico",library
+"revista académica",library
+"recurso bibliográfico",library
+"buscar bibliografía",library
+"buscar un libro",library
+"buscar artículos",library
+"material de investigación",library
+"necesito fuentes para investigar",library
+"quiero acceder a la biblioteca",library
+"recurso de biblioteca",library
+"buscar literatura académica",library
