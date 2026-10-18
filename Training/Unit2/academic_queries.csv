@@ -1,0 +1,197 @@
+text,label
+"¿Dónde puedo revisar mis evaluaciones?",evaluations
+"Quiero ver mis notas del ramo",evaluations
+"¿Cómo reviso una calificación?",evaluations
+"Necesito saber el resultado de una prueba",evaluations
+"¿Dónde aparecen mis notas?",evaluations
+"No encuentro la evaluación de esta semana",evaluations
+"Quiero revisar mis exámenes",evaluations
+"¿Cómo veo la nota de una actividad?",evaluations
+"Necesito consultar mis calificaciones",evaluations
+"¿Dónde está el resultado de mi evaluación?",evaluations
+"Quiero saber cuánto saqué en la prueba",evaluations
+"No veo la nota publicada",evaluations
+"¿Dónde reviso las evaluaciones pendientes?",evaluations
+"¿Cómo puedo consultar mi promedio?",evaluations
+"Necesito revisar el resultado de un examen",evaluations
+"¿En qué parte aparecen las calificaciones?",evaluations
+"Quiero saber si ya corrigieron mi tarea",evaluations
+"¿Dónde veo el puntaje de una actividad?",evaluations
+"No encuentro mis notas en la plataforma",evaluations
+"Necesito consultar una evaluación anterior",evaluations
+"¿Cómo reviso el resultado de un trabajo?",evaluations
+"Quiero ver las calificaciones de la asignatura",evaluations
+"¿Dónde aparecen los puntajes de las pruebas?",evaluations
+"Necesito saber mi nota final",evaluations
+"Quiero revisar si una evaluación fue calificada",evaluations
+"¿Cómo veo el resultado de un control?",evaluations
+"No sé dónde consultar mis evaluaciones",evaluations
+"Necesito revisar las notas del semestre",evaluations
+"¿Cómo hago mi matrícula?",enrollment
+"Necesito información para matricularme",enrollment
+"¿Dónde puedo revisar mi proceso de matrícula?",enrollment
+"Quiero renovar mi matrícula",enrollment
+"¿Qué necesito para inscribirme este semestre?",enrollment
+"No sé cómo continuar con la matrícula",enrollment
+"¿Dónde veo si estoy matriculado?",enrollment
+"Necesito ayuda con mi inscripción",enrollment
+"¿Cómo confirmo mi continuidad de estudios?",enrollment
+"Quiero saber si mi matrícula está vigente",enrollment
+"¿Qué documentos necesito para matricularme?",enrollment
+"No encuentro la opción de matrícula",enrollment
+"¿Dónde inicio el proceso de inscripción?",enrollment
+"Necesito matricular mis asignaturas",enrollment
+"¿Cómo reviso el estado de mi matrícula?",enrollment
+"Quiero saber si tengo algo pendiente para matricularme",enrollment
+"¿Dónde confirmo la inscripción del semestre?",enrollment
+"Necesito orientación para la continuidad académica",enrollment
+"¿Cómo completo el proceso de matrícula?",enrollment
+"No sé si mi inscripción quedó registrada",enrollment
+"¿Dónde reviso mis antecedentes de matrícula?",enrollment
+"Quiero inscribirme para el próximo periodo",enrollment
+"¿Cómo regularizo mi matrícula?",enrollment
+"Necesito saber la fecha de matrícula",enrollment
+"¿Dónde consulto el estado de inscripción?",enrollment
+"Quiero continuar mis estudios y no sé el proceso",enrollment
+"¿Cómo verifico que estoy inscrito?",enrollment
+"Tengo una duda sobre mi matrícula",enrollment
+"Necesito un certificado de alumno regular",certificates
+"¿Cómo solicito un certificado?",certificates
+"Quiero descargar un certificado académico",certificates
+"¿Dónde pido un documento de alumno regular?",certificates
+"Necesito una constancia de estudios",certificates
+"¿Cómo obtengo mi certificado de notas?",certificates
+"Quiero solicitar un documento académico",certificates
+"¿Dónde se descargan los certificados?",certificates
+"Necesito acreditar que soy estudiante",certificates
+"¿Cómo pido un certificado de matrícula?",certificates
+"Quiero obtener una constancia de alumno regular",certificates
+"¿Dónde solicito documentos oficiales?",certificates
+"Necesito un certificado para presentarlo en otra institución",certificates
+"¿Cómo puedo pedir una constancia académica?",certificates
+"Quiero descargar un documento de estudios",certificates
+"¿Dónde veo mis certificados disponibles?",certificates
+"Necesito emitir un certificado",certificates
+"¿Cómo solicito un documento de la universidad?",certificates
+"Quiero pedir un certificado de concentración de notas",certificates
+"¿Dónde puedo obtener una constancia?",certificates
+"Necesito un documento que acredite mi condición de estudiante",certificates
+"¿Cómo reviso el estado de una solicitud de certificado?",certificates
+"Quiero obtener un certificado para un trámite",certificates
+"¿Dónde pido un certificado académico?",certificates
+"Necesito descargar mi certificado de alumno regular",certificates
+"¿Cómo obtengo documentación oficial?",certificates
+"Quiero solicitar una constancia para mi trabajo",certificates
+"No encuentro la opción para certificados",certificates
+"¿Dónde reviso mis pagos?",finance
+"Tengo una duda sobre el arancel",finance
+"Necesito saber cuánto debo pagar",finance
+"¿Cómo reviso una cuota pendiente?",finance
+"Quiero consultar mi deuda",finance
+"¿Dónde veo el estado de mis pagos?",finance
+"Necesito información sobre el arancel mensual",finance
+"¿Cómo puedo pagar una cuota?",finance
+"No aparece un pago que realicé",finance
+"Quiero revisar mi situación financiera",finance
+"¿Dónde consulto las fechas de pago?",finance
+"Necesito saber si tengo una deuda pendiente",finance
+"¿Cómo reviso el detalle del arancel?",finance
+"Quiero confirmar que mi pago fue registrado",finance
+"¿Dónde veo mis cuotas?",finance
+"Necesito orientación sobre un cobro",finance
+"¿Cómo consulto mi saldo pendiente?",finance
+"Quiero saber cuándo vence la próxima cuota",finance
+"No entiendo un cargo en mi cuenta",finance
+"¿Dónde puedo revisar mis antecedentes financieros?",finance
+"Necesito ayuda con un pago de la universidad",finance
+"¿Cómo regularizo una cuota atrasada?",finance
+"Quiero consultar el monto del arancel",finance
+"¿Dónde aparecen mis pagos realizados?",finance
+"Necesito revisar una deuda",finance
+"¿Cómo veo el historial de pagos?",finance
+"Tengo una consulta financiera",finance
+"Quiero confirmar el valor de una cuota",finance
+"No puedo entrar al aula virtual",technicalSupport
+"Tengo un error al iniciar sesión",technicalSupport
+"Olvidé mi contraseña",technicalSupport
+"La plataforma no me deja acceder",technicalSupport
+"Necesito soporte técnico",technicalSupport
+"No puedo abrir el campus virtual",technicalSupport
+"Me aparece un error de acceso",technicalSupport
+"La página no carga correctamente",technicalSupport
+"No puedo ingresar con mi clave",technicalSupport
+"Necesito ayuda con la plataforma",technicalSupport
+"Mi cuenta no funciona",technicalSupport
+"No puedo acceder a una asignatura",technicalSupport
+"El aula virtual se queda cargando",technicalSupport
+"Tengo problemas para iniciar sesión",technicalSupport
+"No recuerdo mi contraseña",technicalSupport
+"La plataforma muestra un mensaje de error",technicalSupport
+"Necesito recuperar mi acceso",technicalSupport
+"No puedo entrar al sistema académico",technicalSupport
+"El sitio se cierra cuando intento ingresar",technicalSupport
+"No puedo abrir un recurso digital",technicalSupport
+"Tengo problemas con mi usuario",technicalSupport
+"La aplicación no me deja iniciar sesión",technicalSupport
+"No puedo acceder desde mi teléfono",technicalSupport
+"Necesito ayuda para recuperar mi clave",technicalSupport
+"El sistema dice que mi usuario no existe",technicalSupport
+"No puedo ingresar al portal",technicalSupport
+"Tengo un problema técnico con el aula",technicalSupport
+"La plataforma está fallando",technicalSupport
+"Necesito ayuda académica",academicSupport
+"Quiero orientación sobre una asignatura",academicSupport
+"¿Dónde puedo pedir acompañamiento?",academicSupport
+"Necesito hablar con alguien sobre mi avance académico",academicSupport
+"Tengo dificultades con una asignatura",academicSupport
+"Quiero saber qué apoyo académico existe",academicSupport
+"Necesito orientación para organizar mis estudios",academicSupport
+"¿Dónde solicito acompañamiento estudiantil?",academicSupport
+"Tengo dudas sobre mi progreso académico",academicSupport
+"Necesito apoyo para continuar el semestre",academicSupport
+"Quiero hablar con un tutor",academicSupport
+"¿Dónde puedo recibir orientación académica?",academicSupport
+"Estoy teniendo problemas con mis estudios",academicSupport
+"Necesito apoyo con mi carga académica",academicSupport
+"Quiero saber a quién consultar por una asignatura",academicSupport
+"¿Cómo solicito ayuda académica?",academicSupport
+"Necesito orientación sobre mi avance",academicSupport
+"No sé con quién hablar por un problema académico",academicSupport
+"Quiero recibir acompañamiento formativo",academicSupport
+"¿Dónde puedo pedir ayuda por mi rendimiento?",academicSupport
+"Necesito apoyo para planificar mis estudios",academicSupport
+"Tengo dudas sobre mi situación académica",academicSupport
+"Quiero orientación para continuar mis estudios",academicSupport
+"¿Dónde encuentro apoyo estudiantil?",academicSupport
+"Necesito hablar sobre una dificultad académica",academicSupport
+"Quiero consultar por acompañamiento académico",academicSupport
+"No sé cómo resolver un problema con una asignatura",academicSupport
+"Necesito orientación general sobre mis estudios",academicSupport
+"¿Dónde encuentro la biblioteca?",library
+"Necesito buscar un libro",library
+"Quiero acceder a la bibliografía del ramo",library
+"¿Cómo busco artículos académicos?",library
+"Necesito material de estudio",library
+"¿Dónde puedo consultar libros digitales?",library
+"Quiero encontrar una referencia bibliográfica",library
+"¿Cómo accedo a los recursos de biblioteca?",library
+"Necesito un artículo para una tarea",library
+"¿Dónde busco bibliografía?",library
+"Quiero consultar una base de datos académica",library
+"Necesito encontrar un libro para mi asignatura",library
+"¿Cómo ingreso a la biblioteca digital?",library
+"Quiero revisar recursos académicos",library
+"¿Dónde puedo descargar material bibliográfico?",library
+"Necesito buscar una revista académica",library
+"¿Cómo encuentro fuentes para un trabajo?",library
+"Quiero acceder a libros electrónicos",library
+"No encuentro la bibliografía que necesito",library
+"¿Dónde busco artículos científicos?",library
+"Necesito material para investigar",library
+"Quiero utilizar los recursos de biblioteca",library
+"¿Cómo encuentro una fuente académica?",library
+"Necesito consultar una referencia",library
+"¿Dónde están los libros digitales?",library
+"Quiero buscar bibliografía para una evaluación",library
+"Necesito apoyo para encontrar material académico",library
+"¿Cómo accedo a los recursos bibliográficos?",library

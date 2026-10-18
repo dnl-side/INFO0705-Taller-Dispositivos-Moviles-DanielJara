@@ -21,6 +21,16 @@ final class UNIACCOrientaViewModel: ObservableObject {
         self.resourceRepository = resourceRepository
     }
 
+    /// Propiedad empleada para indicar el motor que está procesando las consultas.
+    var classifierEngineName: String {
+        classifier.engineName
+    }
+
+    /// Propiedad empleada para indicar si el modelo CoreML se encuentra cargado y activo.
+    var usesCoreML: Bool {
+        classifier.usesCoreML
+    }
+
     /// Función empleada para clasificar la consulta y recuperar el recurso correspondiente.
     func submitQuery() async {
         guard !isLoading else { return }
