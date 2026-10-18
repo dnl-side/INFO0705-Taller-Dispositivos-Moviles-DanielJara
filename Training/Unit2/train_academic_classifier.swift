@@ -1,5 +1,6 @@
 import CreateML
 import Foundation
+import NaturalLanguage
 import TabularData
 
 let scriptURL = URL(fileURLWithPath: #filePath)
@@ -18,7 +19,7 @@ let outputDirectory = repositoryRoot
     .appendingPathComponent("Models")
 
 let outputURL = outputDirectory
-    .appendingPathComponent("AcademicQueryClassifierV2.mlmodel")
+    .appendingPathComponent("AcademicQueryClassifierV3.mlmodel")
 
 try FileManager.default.createDirectory(
     at: outputDirectory,
@@ -34,10 +35,17 @@ let (trainingData, testingData) = data.stratifiedSplit(
     randomSeed: 42
 )
 
+let parameters = MLTextClassifier.ModelParameters(
+    validation: .split(strategy: .automatic),
+    algorithm: .maxEnt(revision: 1),
+    language: .spanish
+)
+
 let classifier = try MLTextClassifier(
     trainingData: trainingData,
     textColumn: "text",
-    labelColumn: "label"
+    labelColumn: "label",
+    parameters: parameters
 )
 
 let testingMetrics = classifier.evaluation(
@@ -65,7 +73,7 @@ print(String(format: "Challenge accuracy: %.2f %%", challengeAccuracy))
 let metadata = MLModelMetadata(
     author: "Daniel Jara",
     shortDescription: "Clasificador local de consultas académicas para UNIACC Orienta.",
-    version: "1.2"
+    version: "1.3"
 )
 
 try classifier.write(to: outputURL, metadata: metadata)

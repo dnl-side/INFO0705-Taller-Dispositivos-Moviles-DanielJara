@@ -14,10 +14,10 @@ let modelURL = repositoryRoot
     .appendingPathComponent("Unit2")
     .appendingPathComponent("Data")
     .appendingPathComponent("Models")
-    .appendingPathComponent("AcademicQueryClassifierV2.mlmodel")
+    .appendingPathComponent("AcademicQueryClassifierV3.mlmodel")
 
 guard FileManager.default.fileExists(atPath: modelURL.path) else {
-    fputs("No se encontró AcademicQueryClassifierV2.mlmodel. Ejecuta primero el script de entrenamiento.\n", stderr)
+    fputs("No se encontró AcademicQueryClassifierV3.mlmodel. Ejecuta primero el script de entrenamiento.\n", stderr)
     exit(1)
 }
 
