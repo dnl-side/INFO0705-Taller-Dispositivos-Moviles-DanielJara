@@ -2,6 +2,8 @@ import SwiftUI
 
 struct UNIACCOrientaView: View {
     @StateObject private var viewModel: UNIACCOrientaViewModel
+    @FocusState private var queryFieldFocused: Bool
+    @State private var queryFieldID = UUID()
 
     private let examples = [
         "¿Ya publicaron la nota del último trabajo?",
@@ -123,11 +125,15 @@ struct UNIACCOrientaView: View {
             )
             .lineLimit(3...6)
             .textFieldStyle(.roundedBorder)
+            .focused($queryFieldFocused)
+            .id(queryFieldID)
 
             HStack {
                 if !viewModel.query.isEmpty {
                     Button("Limpiar") {
+                        queryFieldFocused = false
                         viewModel.reset()
+                        queryFieldID = UUID()
                     }
                     .buttonStyle(.bordered)
                 }
@@ -158,7 +164,9 @@ struct UNIACCOrientaView: View {
 
             ForEach(examples, id: \.self) { example in
                 Button {
+                    queryFieldFocused = false
                     viewModel.useExample(example)
+                    queryFieldID = UUID()
                 } label: {
                     HStack {
                         Text(example)
