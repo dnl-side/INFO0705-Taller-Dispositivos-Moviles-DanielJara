@@ -30,3 +30,22 @@ Taller de Dispositivos Móviles/
 ```
 
 Al volver a abrir Xcode, el modelo queda dentro del grupo sincronizado del proyecto. La aplicación intenta cargarlo automáticamente y utiliza el clasificador preliminar solo cuando el modelo no está disponible.
+
+
+## Evaluación directa del modelo
+
+Para comprobar el archivo `AcademicQueryClassifier.mlmodel` recién generado sin depender de la caché de Xcode o del Simulator:
+
+```bash
+xcrun swift Training/Unit2/evaluate_academic_classifier.swift
+```
+
+El script compila temporalmente el modelo y muestra las tres categorías con mayor probabilidad para varias consultas cortas y naturales.
+
+También se pueden pasar consultas propias:
+
+```bash
+xcrun swift Training/Unit2/evaluate_academic_classifier.swift "calificación" "quiero revisar mi nota"
+```
+
+Esta evaluación es útil para distinguir entre un problema del modelo y un modelo anterior todavía compilado dentro de Xcode.
