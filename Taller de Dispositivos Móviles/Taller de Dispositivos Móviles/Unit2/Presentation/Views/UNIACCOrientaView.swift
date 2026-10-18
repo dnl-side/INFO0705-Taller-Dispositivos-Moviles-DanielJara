@@ -2,6 +2,7 @@ import SwiftUI
 
 struct UNIACCOrientaView: View {
     @StateObject private var viewModel: UNIACCOrientaViewModel
+    @State private var queryText = ""
     @FocusState private var queryFieldFocused: Bool
     @State private var queryFieldID = UUID()
 
@@ -120,7 +121,7 @@ struct UNIACCOrientaView: View {
 
             TextField(
                 "Ejemplo: Necesito solicitar un certificado",
-                text: $viewModel.query,
+                text: $queryText,
                 axis: .vertical
             )
             .lineLimit(3...6)
@@ -129,11 +130,9 @@ struct UNIACCOrientaView: View {
             .id(queryFieldID)
 
             HStack {
-                if !viewModel.query.isEmpty {
+                if !queryText.isEmpty {
                     Button("Limpiar") {
-                        queryFieldFocused = false
-                        viewModel.reset()
-                        queryFieldID = UUID()
+                        clearQuery()
                     }
                     .buttonStyle(.bordered)
                 }
@@ -141,9 +140,7 @@ struct UNIACCOrientaView: View {
                 Spacer()
 
                 Button {
-                    Task {
-                        await viewModel.submitQuery()
-                    }
+                    submitCurrentQuery()
                 } label: {
                     Label("Orientar", systemImage: "arrow.right.circle.fill")
                 }
@@ -165,7 +162,8 @@ struct UNIACCOrientaView: View {
             ForEach(examples, id: \.self) { example in
                 Button {
                     queryFieldFocused = false
-                    viewModel.useExample(example)
+                    queryText = example
+                    viewModel.reset()
                     queryFieldID = UUID()
                 } label: {
                     HStack {
@@ -189,6 +187,20 @@ struct UNIACCOrientaView: View {
         resource: AcademicResource
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
+            if !viewModel.lastProcessedQuery.isEmpty {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Consulta procesada")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Unit2Theme.secondaryText)
+
+                    Text(viewModel.lastProcessedQuery)
+                        .font(.subheadline)
+                        .foregroundStyle(Unit2Theme.primaryText)
+                }
+
+                Divider()
+            }
+
             HStack(spacing: 12) {
                 Image(systemName: classification.category.systemImage)
                     .font(.title2)
@@ -244,6 +256,24 @@ struct UNIACCOrientaView: View {
         }
         .padding(18)
         .background(Unit2Theme.surface, in: RoundedRectangle(cornerRadius: 20))
+    }
+
+    /// Función empleada para confirmar el texto visible después de liberar el foco y enviarlo al ViewModel.
+    private func submitCurrentQuery() {
+        queryFieldFocused = false
+
+        Task { @MainActor in
+            await Task.yield()
+            await viewModel.submitQuery(queryText)
+        }
+    }
+
+    /// Función empleada para eliminar de forma explícita tanto el texto visible como el resultado anterior.
+    private func clearQuery() {
+        queryFieldFocused = false
+        queryText = ""
+        viewModel.reset()
+        queryFieldID = UUID()
     }
 }
 

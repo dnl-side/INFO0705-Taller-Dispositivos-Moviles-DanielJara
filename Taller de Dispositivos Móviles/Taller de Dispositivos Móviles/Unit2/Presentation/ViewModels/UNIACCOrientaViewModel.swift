@@ -3,9 +3,9 @@ import Foundation
 
 @MainActor
 final class UNIACCOrientaViewModel: ObservableObject {
-    @Published var query = ""
     @Published private(set) var classification: AcademicClassification?
     @Published private(set) var resource: AcademicResource?
+    @Published private(set) var lastProcessedQuery = ""
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
 
@@ -31,8 +31,8 @@ final class UNIACCOrientaViewModel: ObservableObject {
         classifier.usesCoreML
     }
 
-    /// Función empleada para clasificar la consulta y recuperar el recurso correspondiente.
-    func submitQuery() async {
+    /// Función empleada para clasificar una consulta entregada por la vista y recuperar el recurso correspondiente.
+    func submitQuery(_ query: String) async {
         guard !isLoading else { return }
 
         let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -40,11 +40,15 @@ final class UNIACCOrientaViewModel: ObservableObject {
             errorMessage = "Escribe una consulta antes de continuar."
             classification = nil
             resource = nil
+            lastProcessedQuery = ""
             return
         }
 
         isLoading = true
         errorMessage = nil
+        classification = nil
+        resource = nil
+        lastProcessedQuery = trimmedQuery
 
         defer {
             isLoading = false
@@ -61,19 +65,11 @@ final class UNIACCOrientaViewModel: ObservableObject {
         }
     }
 
-    /// Función empleada para cargar rápidamente una consulta de ejemplo en la interfaz.
-    func useExample(_ example: String) {
-        query = example
-        classification = nil
-        resource = nil
-        errorMessage = nil
-    }
-
-    /// Función empleada para limpiar la consulta y su resultado.
+    /// Función empleada para limpiar el resultado anterior y dejar la vista preparada para una nueva consulta.
     func reset() {
-        query = ""
         classification = nil
         resource = nil
+        lastProcessedQuery = ""
         errorMessage = nil
     }
 }
