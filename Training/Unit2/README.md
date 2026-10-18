@@ -2,6 +2,8 @@
 
 El archivo `academic_queries.csv` contiene consultas académicas etiquetadas en las siete categorías utilizadas por UNIACC Orienta.
 
+El archivo `challenge_queries.csv` contiene frases separadas del entrenamiento. Se utiliza como conjunto adicional de desafío para comprobar que el modelo pueda clasificar formulaciones nuevas y no solo memorizar ejemplos del dataset.
+
 Para entrenar el modelo desde un Mac con Xcode instalado:
 
 ```bash
@@ -9,7 +11,14 @@ cd ~/Developer/UNIACC/INFO0705-Taller-Dispositivos-Moviles-DanielJara
 xcrun swift Training/Unit2/train_academic_classifier.swift
 ```
 
-El script muestra las métricas de entrenamiento, validación y prueba y genera:
+El script muestra cuatro métricas:
+
+- `Training accuracy`
+- `Validation accuracy`
+- `Testing accuracy`
+- `Challenge accuracy`
+
+y genera:
 
 ```text
 Taller de Dispositivos Móviles/

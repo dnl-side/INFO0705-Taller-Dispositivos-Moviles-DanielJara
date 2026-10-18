@@ -4,9 +4,9 @@ struct UNIACCOrientaView: View {
     @StateObject private var viewModel: UNIACCOrientaViewModel
 
     private let examples = [
-        "¿Dónde puedo revisar mis evaluaciones?",
-        "Necesito un certificado de alumno regular",
-        "No puedo entrar al aula virtual"
+        "¿Ya publicaron la nota del último trabajo?",
+        "¿Cómo puedo acreditar que actualmente estudio aquí?",
+        "Mi contraseña funciona pero el aula no abre"
     ]
 
     /// Función de inicialización empleada para recibir el ViewModel de orientación académica.
