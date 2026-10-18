@@ -49,6 +49,10 @@ struct UNIACCOrientaView: View {
                             )
                     }
 
+                    if viewModel.needsCategorySelection {
+                        categorySelectionCard
+                    }
+
                     if let classification = viewModel.classification,
                        let resource = viewModel.resource {
                         resultCard(
@@ -216,9 +220,7 @@ struct UNIACCOrientaView: View {
                         .font(.headline)
                         .foregroundStyle(Unit2Theme.primaryText)
 
-                    Text(
-                        "\(viewModel.usesCoreML ? "Confianza CoreML" : "Coincidencia preliminar"): \(Int(classification.confidence * 100)) %"
-                    )
+                    Text(confidenceDescription(for: classification))
                     .font(.caption)
                     .foregroundStyle(Unit2Theme.secondaryText)
                 }
@@ -253,9 +255,87 @@ struct UNIACCOrientaView: View {
             Label(resource.channel, systemImage: "building.2")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(Unit2Theme.primary)
+
+            if !viewModel.suggestedCategories.isEmpty {
+                Divider()
+
+                Text("¿No es lo que buscabas? Revisa otra categoría")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(Unit2Theme.secondaryText)
+
+                categoryGrid(viewModel.suggestedCategories)
+            }
         }
         .padding(18)
         .background(Unit2Theme.surface, in: RoundedRectangle(cornerRadius: 20))
+    }
+
+    private var categorySelectionCard: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            if !viewModel.lastProcessedQuery.isEmpty {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Consulta procesada")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Unit2Theme.secondaryText)
+
+                    Text(viewModel.lastProcessedQuery)
+                        .font(.subheadline)
+                        .foregroundStyle(Unit2Theme.primaryText)
+                }
+
+                Divider()
+            }
+
+            Label("No pude identificar con claridad tu consulta", systemImage: "questionmark.circle")
+                .font(.headline)
+                .foregroundStyle(Unit2Theme.primaryText)
+
+            Text("Intenta describirla con más detalle o elige la categoría que mejor se relaciona con lo que necesitas.")
+                .font(.subheadline)
+                .foregroundStyle(Unit2Theme.secondaryText)
+
+            categoryGrid(viewModel.suggestedCategories)
+        }
+        .padding(18)
+        .background(Unit2Theme.surface, in: RoundedRectangle(cornerRadius: 20))
+    }
+
+    private func categoryGrid(_ categories: [AcademicCategory]) -> some View {
+        LazyVGrid(
+            columns: [GridItem(.flexible()), GridItem(.flexible())],
+            alignment: .leading,
+            spacing: 10
+        ) {
+            ForEach(categories) { category in
+                Button {
+                    Task { @MainActor in
+                        await viewModel.selectCategory(category)
+                    }
+                } label: {
+                    Label(category.displayName, systemImage: category.systemImage)
+                        .font(.caption.weight(.semibold))
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(10)
+                        .background(
+                            Unit2Theme.primary.opacity(0.08),
+                            in: RoundedRectangle(cornerRadius: 12)
+                        )
+                }
+                .foregroundStyle(Unit2Theme.primary)
+                .disabled(viewModel.isLoading)
+            }
+        }
+    }
+
+    /// Función empleada para describir el origen del resultado mostrado.
+    private func confidenceDescription(for classification: AcademicClassification) -> String {
+        if viewModel.isManualSelection {
+            return "Categoría seleccionada manualmente"
+        }
+
+        let engine = viewModel.usesCoreML ? "Confianza CoreML" : "Coincidencia preliminar"
+        return "\(engine): \(Int(classification.confidence * 100)) %"
     }
 
     /// Función empleada para confirmar el texto visible después de liberar el foco y enviarlo al ViewModel.

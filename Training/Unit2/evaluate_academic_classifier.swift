@@ -2,6 +2,22 @@ import CoreML
 import Foundation
 import NaturalLanguage
 
+/// Función empleada para normalizar el texto igual que `AcademicQueryNormalizer` en la aplicación.
+func normalizeQuery(_ text: String) -> String {
+    let folded = text
+        .precomposedStringWithCanonicalMapping
+        .folding(
+            options: [.diacriticInsensitive, .caseInsensitive],
+            locale: Locale(identifier: "es_CL")
+        )
+        .lowercased()
+
+    return folded
+        .components(separatedBy: CharacterSet.alphanumerics.inverted)
+        .filter { !$0.isEmpty }
+        .joined(separator: " ")
+}
+
 let scriptURL = URL(fileURLWithPath: #filePath)
 let trainingDirectory = scriptURL.deletingLastPathComponent()
 let repositoryRoot = trainingDirectory
@@ -14,10 +30,10 @@ let modelURL = repositoryRoot
     .appendingPathComponent("Unit2")
     .appendingPathComponent("Data")
     .appendingPathComponent("Models")
-    .appendingPathComponent("AcademicQueryClassifierV3.mlmodel")
+    .appendingPathComponent("AcademicQueryClassifierV4.mlmodel")
 
 guard FileManager.default.fileExists(atPath: modelURL.path) else {
-    fputs("No se encontró AcademicQueryClassifierV3.mlmodel. Ejecuta primero el script de entrenamiento.\n", stderr)
+    fputs("No se encontró AcademicQueryClassifierV4.mlmodel. Ejecuta primero el script de entrenamiento.\n", stderr)
     exit(1)
 }
 
@@ -30,6 +46,11 @@ let model = try NLModel(contentsOf: compiledURL)
 
 let defaultQueries = [
     "evaluación",
+    "evaluacion",
+    "matricula",
+    "contrasena",
+    "hola",
+    "beca",
     "evaluaciones",
     "calificación",
     "calificaciones",
@@ -51,7 +72,7 @@ let queries = customQueries.isEmpty ? defaultQueries : customQueries
 
 for query in queries {
     let hypotheses = model
-        .predictedLabelHypotheses(for: query, maximumCount: 3)
+        .predictedLabelHypotheses(for: normalizeQuery(query), maximumCount: 7)
         .sorted { $0.value > $1.value }
 
     print("\nConsulta: \(query)")
@@ -61,7 +82,13 @@ for query in queries {
         continue
     }
 
-    for (index, hypothesis) in hypotheses.enumerated() {
+    // Mismos umbrales que CoreMLAcademicQueryClassifier: confianza mínima 25 % y diferencia mínima de 10 puntos.
+    let best = hypotheses[0].value
+    let second = hypotheses.count > 1 ? hypotheses[1].value : 0
+    let isReliable = best >= 0.25 && best - second >= 0.10
+    print("  Resultado en la app: \(isReliable ? "muestra el recurso" : "pide elegir categoría")")
+
+    for (index, hypothesis) in hypotheses.prefix(3).enumerated() {
         print(
             String(
                 format: "  %d. %@ — %.2f %%",

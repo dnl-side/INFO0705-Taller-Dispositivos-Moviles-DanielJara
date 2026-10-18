@@ -8,6 +8,9 @@ final class UNIACCOrientaViewModel: ObservableObject {
     @Published private(set) var lastProcessedQuery = ""
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
+    @Published private(set) var suggestedCategories: [AcademicCategory] = []
+    @Published private(set) var needsCategorySelection = false
+    @Published private(set) var isManualSelection = false
 
     private let classifier: AcademicQueryClassifying
     private let resourceRepository: AcademicResourceRepository
@@ -37,17 +40,14 @@ final class UNIACCOrientaViewModel: ObservableObject {
 
         let trimmedQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedQuery.isEmpty else {
-            errorMessage = "Escribe una consulta antes de continuar."
-            classification = nil
-            resource = nil
+            clearResult()
             lastProcessedQuery = ""
+            errorMessage = "Escribe una consulta antes de continuar."
             return
         }
 
         isLoading = true
-        errorMessage = nil
-        classification = nil
-        resource = nil
+        clearResult()
         lastProcessedQuery = trimmedQuery
 
         defer {
@@ -57,19 +57,74 @@ final class UNIACCOrientaViewModel: ObservableObject {
         do {
             let result = try await classifier.classify(query: trimmedQuery)
             classification = result
-            resource = try await resourceRepository.resource(for: result.category)
+
+            if result.isReliable {
+                resource = try await resourceRepository.resource(for: result.category)
+                suggestedCategories = rankedCategories(
+                    preferred: result.alternatives,
+                    excluding: result.category
+                )
+            } else {
+                needsCategorySelection = true
+                suggestedCategories = rankedCategories(
+                    preferred: result.confidence > 0 ? [result.category] + result.alternatives : []
+                )
+            }
         } catch {
-            classification = nil
-            resource = nil
+            clearResult()
             errorMessage = "No fue posible procesar la consulta."
+        }
+    }
+
+    /// Función empleada para mostrar el recurso de una categoría elegida por el estudiante cuando la sugerencia no es la adecuada.
+    func selectCategory(_ category: AcademicCategory) async {
+        guard !isLoading else { return }
+
+        isLoading = true
+        errorMessage = nil
+
+        defer {
+            isLoading = false
+        }
+
+        do {
+            let selectedResource = try await resourceRepository.resource(for: category)
+
+            resource = selectedResource
+            classification = AcademicClassification(category: category, confidence: 1)
+            isManualSelection = true
+            needsCategorySelection = false
+            suggestedCategories = rankedCategories(
+                preferred: suggestedCategories,
+                excluding: category
+            )
+        } catch {
+            errorMessage = "No fue posible cargar el recurso seleccionado."
         }
     }
 
     /// Función empleada para limpiar el resultado anterior y dejar la vista preparada para una nueva consulta.
     func reset() {
+        clearResult()
+        lastProcessedQuery = ""
+    }
+
+    /// Función empleada para eliminar el resultado visible sin modificar la consulta procesada.
+    private func clearResult() {
         classification = nil
         resource = nil
-        lastProcessedQuery = ""
         errorMessage = nil
+        suggestedCategories = []
+        needsCategorySelection = false
+        isManualSelection = false
+    }
+
+    /// Función empleada para ordenar todas las categorías comenzando por las sugeridas por el clasificador.
+    private func rankedCategories(
+        preferred: [AcademicCategory],
+        excluding excludedCategory: AcademicCategory? = nil
+    ) -> [AcademicCategory] {
+        let remaining = AcademicCategory.allCases.filter { !preferred.contains($0) }
+        return (preferred + remaining).filter { $0 != excludedCategory }
     }
 }
