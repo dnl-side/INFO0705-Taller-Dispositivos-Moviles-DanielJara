@@ -1,17 +1,10 @@
-import Foundation
-
-#if canImport(FirebaseCore)
 import FirebaseCore
-#endif
-
-#if canImport(FirebaseFirestore)
 import FirebaseFirestore
-#endif
+import Foundation
 
 enum FirebaseBootstrapper {
     /// Función empleada para configurar Firebase desde el plist o mediante opciones explícitas del proyecto.
     static func configureIfAvailable(bundle: Bundle = .main) -> Bool {
-        #if canImport(FirebaseCore)
         if FirebaseApp.app() == nil {
             if let plistPath = bundle.path(
                 forResource: "GoogleService-Info",
@@ -30,12 +23,8 @@ enum FirebaseBootstrapper {
 
         configureFirestoreCache()
         return true
-        #else
-        return false
-        #endif
     }
 
-    #if canImport(FirebaseCore)
     /// Función empleada como respaldo cuando el archivo de configuración no se encuentra dentro del bundle.
     private static func fallbackOptions(bundle: Bundle) -> FirebaseOptions {
         let options = FirebaseOptions(
@@ -48,17 +37,14 @@ enum FirebaseBootstrapper {
         options.storageBucket = "uniacc-orienta-danieljara.firebasestorage.app"
         return options
     }
-    #endif
 
     /// Función empleada para declarar explícitamente una caché persistente de Firestore para el trabajo sin conexión.
     private static func configureFirestoreCache() {
-        #if canImport(FirebaseFirestore)
         let database = Firestore.firestore()
         let settings = database.settings
         settings.cacheSettings = PersistentCacheSettings(
             sizeBytes: 20 * 1024 * 1024 as NSNumber
         )
         database.settings = settings
-        #endif
     }
 }
