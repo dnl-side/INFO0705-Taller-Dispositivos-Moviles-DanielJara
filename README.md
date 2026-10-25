@@ -30,6 +30,19 @@ Incluye consulta de estudiantes, clases, registro de asistencia, seguimiento de 
 
 ## Unidad 2
 
-UNIACC Orienta busca facilitar el acceso a servicios académicos a partir de consultas breves. La clasificación se integra mediante un contrato independiente del ViewModel. Cuando el modelo `AcademicQueryClassifier.mlmodel` está presente, las consultas se procesan localmente con CoreML; mientras no exista el recurso compilado, se conserva un clasificador preliminar como respaldo. Las consultas se normalizan (sin tildes, mayúsculas ni signos) antes de clasificarse, y cuando la confianza es baja la aplicación permite elegir la categoría manualmente en lugar de mostrar un recurso incorrecto.
+UNIACC Orienta busca facilitar el acceso a servicios académicos a partir de consultas breves. La clasificación se integra mediante un contrato independiente del ViewModel. El modelo `AcademicQueryClassifierV4.mlmodel` procesa las consultas localmente mediante CoreML; si el recurso no se encuentra disponible, se conserva un clasificador preliminar como respaldo. Las consultas se normalizan (sin tildes, mayúsculas ni signos) antes de clasificarse, y cuando la confianza es baja la aplicación permite elegir la categoría manualmente en lugar de mostrar un recurso incorrecto.
 
-Los recursos académicos continúan detrás de `AcademicResourceRepository`, preparado para sustituir la fuente local por Firebase/Firestore sin modificar la capa de presentación.
+Los recursos académicos se obtienen mediante `AcademicResourceRepository`: Firestore actúa como fuente cloud, la caché de Firestore permite reutilizar datos disponibles sin conexión y `LocalAcademicResourceDataSource` queda como respaldo si el servicio remoto no está disponible. La interfaz informa además el estado de conectividad y el origen del recurso mostrado.
+
+
+## Validación Unidad 2
+
+La integración se validó en iOS Simulator con Firebase Apple SDK 13.1.1:
+
+- clasificación local mediante CoreML V4;
+- autenticación anónima en Firebase;
+- lectura de los siete recursos desde Cloud Firestore;
+- detección de conectividad con Network.framework;
+- lectura desde caché persistente de Firestore al perder conexión;
+- recuperación automática de la fuente cloud al restablecer la red;
+- respaldo local cuando la fuente remota no se encuentra disponible.

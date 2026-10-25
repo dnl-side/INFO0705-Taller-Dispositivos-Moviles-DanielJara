@@ -27,6 +27,7 @@ struct UNIACCOrientaView: View {
                 VStack(alignment: .leading, spacing: 22) {
                     header
                     classifierStatus
+                    cloudStatus
                     queryCard
                     examplesSection
 
@@ -112,6 +113,44 @@ struct UNIACCOrientaView: View {
                     (viewModel.usesCoreML ? Color.green : Unit2Theme.accent).opacity(0.10),
                     in: Capsule()
                 )
+        }
+        .padding(14)
+        .background(Unit2Theme.surface, in: RoundedRectangle(cornerRadius: 16))
+    }
+
+    private var cloudStatus: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Conectividad")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Unit2Theme.secondaryText)
+
+                    Label(
+                        viewModel.connectivityStatus.displayName,
+                        systemImage: viewModel.connectivityStatus == .offline ? "wifi.slash" : "wifi"
+                    )
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(
+                        viewModel.connectivityStatus == .offline
+                            ? Unit2Theme.accent
+                            : Unit2Theme.primary
+                    )
+                }
+
+                Spacer()
+
+                VStack(alignment: .trailing, spacing: 3) {
+                    Text("Origen de datos")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Unit2Theme.secondaryText)
+
+                    Text(viewModel.resourceSource?.displayName ?? "Sin consulta")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Unit2Theme.primaryText)
+                }
+            }
+
         }
         .padding(14)
         .background(Unit2Theme.surface, in: RoundedRectangle(cornerRadius: 16))
