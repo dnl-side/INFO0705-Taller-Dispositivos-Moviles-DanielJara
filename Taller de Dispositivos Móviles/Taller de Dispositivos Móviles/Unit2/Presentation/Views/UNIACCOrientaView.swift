@@ -151,6 +151,14 @@ struct UNIACCOrientaView: View {
         }
         .padding(14)
         .background(Unit2Theme.surface, in: RoundedRectangle(cornerRadius: 16))
+
+        if let reason = viewModel.cloudFallbackReason,
+           viewModel.resourceSource == .localFallback {
+            Text("Detalle cloud: \(reason)")
+                .font(.caption2)
+                .foregroundStyle(Unit2Theme.secondaryText)
+                .textSelection(.enabled)
+        }
     }
 
     private var queryCard: some View {
