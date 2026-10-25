@@ -17,6 +17,7 @@ final class UNIACCOrientaViewModel: ObservableObject {
 
     private let classifier: AcademicQueryClassifying
     private let resourceRepository: AcademicResourceRepository
+    private let connectivityMonitor: ConnectivityMonitoring
     private var cancellables = Set<AnyCancellable>()
 
     /// Función de inicialización empleada para recibir clasificación, datos y estado de conectividad.
@@ -27,6 +28,7 @@ final class UNIACCOrientaViewModel: ObservableObject {
     ) {
         self.classifier = classifier
         self.resourceRepository = resourceRepository
+        self.connectivityMonitor = connectivityMonitor
         connectivityStatus = connectivityMonitor.currentStatus
 
         connectivityMonitor.statusPublisher
