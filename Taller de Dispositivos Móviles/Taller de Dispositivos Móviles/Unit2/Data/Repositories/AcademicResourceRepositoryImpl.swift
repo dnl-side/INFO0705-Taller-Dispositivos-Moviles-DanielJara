@@ -1,5 +1,3 @@
-import Foundation
-
 final class AcademicResourceRepositoryImpl: AcademicResourceRepository {
     private let localDataSource: LocalAcademicResourceDataSource
     private let remoteDataSource: FirestoreAcademicResourceDataSource
@@ -19,17 +17,10 @@ final class AcademicResourceRepositoryImpl: AcademicResourceRepository {
             return try await remoteDataSource.resource(for: category)
         } catch {
             let resource = try localDataSource.resource(for: category)
-            let nsError = error as NSError
-            let reason = nsError.domain
-                + " ["
-                + String(nsError.code)
-                + "]: "
-                + nsError.localizedDescription
 
             return AcademicResourceLoadResult(
                 resource: resource,
-                source: .localFallback,
-                fallbackReason: reason
+                source: .localFallback
             )
         }
     }
