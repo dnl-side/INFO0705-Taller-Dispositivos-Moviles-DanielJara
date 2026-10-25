@@ -18,8 +18,10 @@ final class NetworkConnectivityMonitor: ConnectivityMonitoring {
     /// Función de inicialización empleada para comenzar a observar cambios en la conectividad del dispositivo.
     init() {
         monitor.pathUpdateHandler = { [weak self] path in
-            Task { @MainActor in
-                self?.currentStatus = path.status == .satisfied ? .online : .offline
+            let status: ConnectivityStatus = path.status == .satisfied ? .online : .offline
+
+            Task { @MainActor [weak self, status] in
+                self?.currentStatus = status
             }
         }
 
