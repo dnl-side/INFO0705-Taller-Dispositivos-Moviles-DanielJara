@@ -20,7 +20,11 @@ final class AcademicResourceRepositoryImpl: AcademicResourceRepository {
         } catch {
             let resource = try localDataSource.resource(for: category)
             let nsError = error as NSError
-            let reason = "(nsError.domain) [(nsError.code)]: (nsError.localizedDescription)"
+            let reason = nsError.domain
+                + " ["
+                + String(nsError.code)
+                + "]: "
+                + nsError.localizedDescription
 
             return AcademicResourceLoadResult(
                 resource: resource,
