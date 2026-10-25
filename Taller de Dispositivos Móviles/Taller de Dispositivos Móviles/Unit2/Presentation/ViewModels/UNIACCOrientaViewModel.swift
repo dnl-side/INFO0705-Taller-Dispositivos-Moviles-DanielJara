@@ -5,6 +5,8 @@ import Foundation
 final class UNIACCOrientaViewModel: ObservableObject {
     @Published private(set) var classification: AcademicClassification?
     @Published private(set) var resource: AcademicResource?
+    @Published private(set) var resourceSource: AcademicResourceSource?
+    @Published private(set) var connectivityStatus: ConnectivityStatus
     @Published private(set) var lastProcessedQuery = ""
     @Published private(set) var isLoading = false
     @Published private(set) var errorMessage: String?
@@ -14,14 +16,24 @@ final class UNIACCOrientaViewModel: ObservableObject {
 
     private let classifier: AcademicQueryClassifying
     private let resourceRepository: AcademicResourceRepository
+    private var cancellables = Set<AnyCancellable>()
 
-    /// Función de inicialización empleada para recibir el clasificador y el repositorio de recursos académicos.
+    /// Función de inicialización empleada para recibir clasificación, datos y estado de conectividad.
     init(
         classifier: AcademicQueryClassifying,
-        resourceRepository: AcademicResourceRepository
+        resourceRepository: AcademicResourceRepository,
+        connectivityMonitor: ConnectivityMonitoring
     ) {
         self.classifier = classifier
         self.resourceRepository = resourceRepository
+        connectivityStatus = connectivityMonitor.currentStatus
+
+        connectivityMonitor.statusPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                self?.connectivityStatus = status
+            }
+            .store(in: &cancellables)
     }
 
     /// Propiedad empleada para indicar el motor que está procesando las consultas.
@@ -59,7 +71,9 @@ final class UNIACCOrientaViewModel: ObservableObject {
             classification = result
 
             if result.isReliable {
-                resource = try await resourceRepository.resource(for: result.category)
+                let loadResult = try await resourceRepository.resource(for: result.category)
+                resource = loadResult.resource
+                resourceSource = loadResult.source
                 suggestedCategories = rankedCategories(
                     preferred: result.alternatives,
                     excluding: result.category
@@ -88,9 +102,10 @@ final class UNIACCOrientaViewModel: ObservableObject {
         }
 
         do {
-            let selectedResource = try await resourceRepository.resource(for: category)
+            let loadResult = try await resourceRepository.resource(for: category)
 
-            resource = selectedResource
+            resource = loadResult.resource
+            resourceSource = loadResult.source
             classification = AcademicClassification(category: category, confidence: 1)
             isManualSelection = true
             needsCategorySelection = false
@@ -113,6 +128,7 @@ final class UNIACCOrientaViewModel: ObservableObject {
     private func clearResult() {
         classification = nil
         resource = nil
+        resourceSource = nil
         errorMessage = nil
         suggestedCategories = []
         needsCategorySelection = false

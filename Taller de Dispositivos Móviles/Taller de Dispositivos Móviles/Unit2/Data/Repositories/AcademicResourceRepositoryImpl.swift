@@ -1,13 +1,26 @@
 final class AcademicResourceRepositoryImpl: AcademicResourceRepository {
     private let localDataSource: LocalAcademicResourceDataSource
+    private let remoteDataSource: FirestoreAcademicResourceDataSource
 
-    /// Función de inicialización empleada para recibir la fuente local utilizada durante la base funcional de la Unidad 2.
-    init(localDataSource: LocalAcademicResourceDataSource) {
+    /// Función de inicialización empleada para recibir las fuentes remota y local coordinadas por el Repository.
+    init(
+        localDataSource: LocalAcademicResourceDataSource,
+        remoteDataSource: FirestoreAcademicResourceDataSource
+    ) {
         self.localDataSource = localDataSource
+        self.remoteDataSource = remoteDataSource
     }
 
-    /// Función empleada para obtener el recurso académico disponible para una categoría.
-    func resource(for category: AcademicCategory) async throws -> AcademicResource {
-        try localDataSource.resource(for: category)
+    /// Función empleada para priorizar Firestore y utilizar el respaldo local si la nube no está disponible.
+    func resource(for category: AcademicCategory) async throws -> AcademicResourceLoadResult {
+        do {
+            return try await remoteDataSource.resource(for: category)
+        } catch {
+            let resource = try localDataSource.resource(for: category)
+            return AcademicResourceLoadResult(
+                resource: resource,
+                source: .localFallback
+            )
+        }
     }
 }

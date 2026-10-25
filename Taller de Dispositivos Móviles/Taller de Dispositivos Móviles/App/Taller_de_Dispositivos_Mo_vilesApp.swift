@@ -8,6 +8,8 @@ struct Taller_de_Dispositivos_Mo_vilesApp: App {
 
     /// Función de inicialización empleada para preparar las dependencias de ambas unidades.
     init() {
+        _ = FirebaseBootstrapper.configureIfAvailable()
+
         let unit1Container = Unit1DependencyContainer()
         let unit2Container = Unit2DependencyContainer()
 
