@@ -151,13 +151,6 @@ struct UNIACCOrientaView: View {
                 }
             }
 
-            if let reason = viewModel.cloudFallbackReason,
-               viewModel.resourceSource == .localFallback {
-                Text("Detalle cloud: " + reason)
-                    .font(.caption2)
-                    .foregroundStyle(Unit2Theme.secondaryText)
-                    .textSelection(.enabled)
-            }
         }
         .padding(14)
         .background(Unit2Theme.surface, in: RoundedRectangle(cornerRadius: 16))
