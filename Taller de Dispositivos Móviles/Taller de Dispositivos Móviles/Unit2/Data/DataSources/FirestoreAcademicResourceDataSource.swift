@@ -1,6 +1,7 @@
 import Foundation
 
-#if canImport(FirebaseAuth) && canImport(FirebaseFirestore)
+#if canImport(FirebaseCore) && canImport(FirebaseAuth) && canImport(FirebaseFirestore)
+import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
 #endif
@@ -14,7 +15,11 @@ enum FirestoreAcademicResourceError: Error {
 final class FirestoreAcademicResourceDataSource {
     /// Función empleada para recuperar desde Firestore el recurso correspondiente a una categoría.
     func resource(for category: AcademicCategory) async throws -> AcademicResourceLoadResult {
-        #if canImport(FirebaseAuth) && canImport(FirebaseFirestore)
+        #if canImport(FirebaseCore) && canImport(FirebaseAuth) && canImport(FirebaseFirestore)
+        guard FirebaseApp.app() != nil else {
+            throw FirestoreAcademicResourceError.firebaseUnavailable
+        }
+
         if Auth.auth().currentUser == nil {
             _ = try await Auth.auth().signInAnonymously()
         }
