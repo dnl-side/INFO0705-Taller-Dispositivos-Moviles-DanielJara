@@ -21,10 +21,16 @@ enum AcademicResourceSource: String, Equatable {
 struct AcademicResourceLoadResult: Equatable {
     let resource: AcademicResource
     let source: AcademicResourceSource
+    let fallbackReason: String?
 
     /// Función de inicialización empleada para asociar un recurso académico con su origen de datos.
-    init(resource: AcademicResource, source: AcademicResourceSource) {
+    init(
+        resource: AcademicResource,
+        source: AcademicResourceSource,
+        fallbackReason: String? = nil
+    ) {
         self.resource = resource
         self.source = source
+        self.fallbackReason = fallbackReason
     }
 }
