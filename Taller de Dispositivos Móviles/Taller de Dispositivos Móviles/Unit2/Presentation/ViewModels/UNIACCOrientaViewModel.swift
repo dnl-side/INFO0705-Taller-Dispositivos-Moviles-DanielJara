@@ -6,7 +6,6 @@ final class UNIACCOrientaViewModel: ObservableObject {
     @Published private(set) var classification: AcademicClassification?
     @Published private(set) var resource: AcademicResource?
     @Published private(set) var resourceSource: AcademicResourceSource?
-    @Published private(set) var cloudFallbackReason: String?
     @Published private(set) var connectivityStatus: ConnectivityStatus
     @Published private(set) var lastProcessedQuery = ""
     @Published private(set) var isLoading = false
@@ -77,7 +76,6 @@ final class UNIACCOrientaViewModel: ObservableObject {
                 let loadResult = try await resourceRepository.resource(for: result.category)
                 resource = loadResult.resource
                 resourceSource = loadResult.source
-                cloudFallbackReason = loadResult.fallbackReason
                 suggestedCategories = rankedCategories(
                     preferred: result.alternatives,
                     excluding: result.category
@@ -133,7 +131,6 @@ final class UNIACCOrientaViewModel: ObservableObject {
         classification = nil
         resource = nil
         resourceSource = nil
-        cloudFallbackReason = nil
         errorMessage = nil
         suggestedCategories = []
         needsCategorySelection = false
