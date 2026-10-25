@@ -56,3 +56,14 @@ Cada documento contiene:
 Las reglas incluidas en `Firebase/firestore.rules` permiten lectura únicamente a sesiones autenticadas y bloquean todas las escrituras desde la aplicación cliente.
 
 El prototipo usa autenticación anónima para obtener una sesión Firebase sin solicitar credenciales al estudiante. En una implementación institucional real, esta sesión puede reemplazarse por autenticación federada o SSO institucional sin modificar la capa de presentación.
+
+
+## Comportamiento offline
+
+Firestore utiliza caché persistente en el dispositivo. Cuando un recurso ya fue consultado y la conexión se pierde, el Repository puede recuperar el documento desde la caché de Firestore. La interfaz diferencia visualmente tres orígenes:
+
+- `Firestore`: respuesta obtenida desde la fuente cloud.
+- `Caché Firestore`: documento disponible localmente después de una consulta previa.
+- `Respaldo local`: recurso de contingencia utilizado si la fuente remota no puede entregar información.
+
+La conectividad se observa con `NWPathMonitor`, de modo que la interfaz puede mostrar los estados en línea y sin conexión.
