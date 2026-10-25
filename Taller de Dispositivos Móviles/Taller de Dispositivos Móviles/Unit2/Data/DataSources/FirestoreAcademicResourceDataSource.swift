@@ -6,10 +6,21 @@ import FirebaseAuth
 import FirebaseFirestore
 #endif
 
-enum FirestoreAcademicResourceError: Error {
+enum FirestoreAcademicResourceError: LocalizedError {
     case firebaseUnavailable
     case resourceNotFound
     case invalidData
+
+    var errorDescription: String? {
+        switch self {
+        case .firebaseUnavailable:
+            "Firebase no quedó configurado al iniciar la aplicación."
+        case .resourceNotFound:
+            "El documento solicitado no existe en Firestore."
+        case .invalidData:
+            "El documento de Firestore existe, pero sus campos no tienen el formato esperado."
+        }
+    }
 }
 
 final class FirestoreAcademicResourceDataSource {
