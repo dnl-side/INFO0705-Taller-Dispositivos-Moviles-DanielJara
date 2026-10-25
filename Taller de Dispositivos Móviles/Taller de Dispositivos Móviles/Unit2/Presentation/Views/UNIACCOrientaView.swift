@@ -119,46 +119,48 @@ struct UNIACCOrientaView: View {
     }
 
     private var cloudStatus: some View {
-        HStack(spacing: 12) {
-            VStack(alignment: .leading, spacing: 3) {
-                Text("Conectividad")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(Unit2Theme.secondaryText)
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Conectividad")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Unit2Theme.secondaryText)
 
-                Label(
-                    viewModel.connectivityStatus.displayName,
-                    systemImage: viewModel.connectivityStatus == .offline ? "wifi.slash" : "wifi"
-                )
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(
-                    viewModel.connectivityStatus == .offline
-                        ? Unit2Theme.accent
-                        : Unit2Theme.primary
-                )
+                    Label(
+                        viewModel.connectivityStatus.displayName,
+                        systemImage: viewModel.connectivityStatus == .offline ? "wifi.slash" : "wifi"
+                    )
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(
+                        viewModel.connectivityStatus == .offline
+                            ? Unit2Theme.accent
+                            : Unit2Theme.primary
+                    )
+                }
+
+                Spacer()
+
+                VStack(alignment: .trailing, spacing: 3) {
+                    Text("Origen de datos")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Unit2Theme.secondaryText)
+
+                    Text(viewModel.resourceSource?.displayName ?? "Sin consulta")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Unit2Theme.primaryText)
+                }
             }
 
-            Spacer()
-
-            VStack(alignment: .trailing, spacing: 3) {
-                Text("Origen de datos")
-                    .font(.caption.weight(.semibold))
+            if let reason = viewModel.cloudFallbackReason,
+               viewModel.resourceSource == .localFallback {
+                Text("Detalle cloud: " + reason)
+                    .font(.caption2)
                     .foregroundStyle(Unit2Theme.secondaryText)
-
-                Text(viewModel.resourceSource?.displayName ?? "Sin consulta")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Unit2Theme.primaryText)
+                    .textSelection(.enabled)
             }
         }
         .padding(14)
         .background(Unit2Theme.surface, in: RoundedRectangle(cornerRadius: 16))
-
-        if let reason = viewModel.cloudFallbackReason,
-           viewModel.resourceSource == .localFallback {
-            Text("Detalle cloud: \(reason)")
-                .font(.caption2)
-                .foregroundStyle(Unit2Theme.secondaryText)
-                .textSelection(.enabled)
-        }
     }
 
     private var queryCard: some View {
