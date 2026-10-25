@@ -1,12 +1,16 @@
 # Configuración Firebase - Unidad 2
 
+Proyecto Firebase: `uniacc-orienta-danieljara`
+
+Base Firestore: `(default)` · Standard · Native mode · `asia-northeast1` (Tokyo)
+
 La Unidad 2 utiliza Cloud Firestore como fuente remota de recursos académicos y autenticación anónima para restringir las lecturas a sesiones válidas de la aplicación.
 
 ## Servicios requeridos
 
 - Cloud Firestore
 - Firebase Authentication con proveedor Anonymous
-- Firebase Apple SDK: FirebaseCore, FirebaseAuth y FirebaseFirestore
+- Firebase Apple SDK 13.1.1 o superior: FirebaseCore, FirebaseAuth y FirebaseFirestore
 
 ## Aplicación iOS
 
