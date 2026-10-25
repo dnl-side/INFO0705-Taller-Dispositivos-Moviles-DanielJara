@@ -1,10 +1,7 @@
-import Foundation
-
-#if canImport(FirebaseCore) && canImport(FirebaseAuth) && canImport(FirebaseFirestore)
-import FirebaseCore
 import FirebaseAuth
+import FirebaseCore
 import FirebaseFirestore
-#endif
+import Foundation
 
 enum FirestoreAcademicResourceError: LocalizedError {
     case firebaseUnavailable
@@ -26,7 +23,6 @@ enum FirestoreAcademicResourceError: LocalizedError {
 final class FirestoreAcademicResourceDataSource {
     /// Función empleada para recuperar desde Firestore el recurso correspondiente a una categoría.
     func resource(for category: AcademicCategory) async throws -> AcademicResourceLoadResult {
-        #if canImport(FirebaseCore) && canImport(FirebaseAuth) && canImport(FirebaseFirestore)
         guard FirebaseApp.app() != nil else {
             throw FirestoreAcademicResourceError.firebaseUnavailable
         }
@@ -66,8 +62,5 @@ final class FirestoreAcademicResourceDataSource {
             resource: resource,
             source: snapshot.metadata.isFromCache ? .cache : .cloud
         )
-        #else
-        throw FirestoreAcademicResourceError.firebaseUnavailable
-        #endif
     }
 }
