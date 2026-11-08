@@ -8,7 +8,7 @@ struct Taller_de_Dispositivos_Mo_vilesApp: App {
     private let unit1DashboardViewModel: DanceDashboardViewModel
     private let unit2ViewModel: UNIACCOrientaViewModel
 
-    /// Función de inicialización empleada para preparar las dependencias de ambas unidades.
+    /// Función de inicialización empleada para preparar las dependencias persistentes de las unidades anteriores.
     init() {
         let unit1Container = Unit1DependencyContainer()
         let unit2Container = Unit2DependencyContainer()

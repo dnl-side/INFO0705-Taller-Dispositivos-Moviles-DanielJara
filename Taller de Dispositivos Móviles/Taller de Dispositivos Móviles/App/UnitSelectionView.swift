@@ -16,7 +16,7 @@ struct UnitSelectionView: View {
         self.unit2ViewModel = unit2ViewModel
     }
 
-    /// Propiedad empleada para mostrar la pantalla inicial de selección entre Unidad 1 y Unidad 2.
+    /// Propiedad empleada para mostrar la pantalla inicial de selección entre las unidades disponibles.
     var body: some View {
         NavigationStack {
             ZStack {
@@ -57,14 +57,27 @@ struct UnitSelectionView: View {
                             UnitSelectionCard(
                                 unit: "Unidad 2",
                                 title: "UNIACC Orienta",
-                                description: "Base del microproyecto con clasificación de consultas y recursos académicos.",
+                                description: "CoreML, Firebase y orientación académica con funcionamiento offline.",
                                 icon: "sparkles.rectangle.stack",
                                 accent: Color(red: 0.18, green: 0.43, blue: 0.63)
                             )
                         }
                         .buttonStyle(.plain)
 
-                        Text("Cada unidad mantiene su arquitectura y dominio de forma independiente dentro del mismo proyecto.")
+                        NavigationLink {
+                            Unit3RootView()
+                        } label: {
+                            UnitSelectionCard(
+                                unit: "Unidad 3",
+                                title: "UNIACC Orienta Secure",
+                                description: "Optimización, historial cifrado, biometría, accesibilidad y profiling.",
+                                icon: "lock.shield",
+                                accent: Color(red: 0.10, green: 0.46, blue: 0.36)
+                            )
+                        }
+                        .buttonStyle(.plain)
+
+                        Text("Cada unidad mantiene su implementación separada para conservar la evidencia y evolución de cada entrega.")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                             .padding(.top, 4)

@@ -12,7 +12,9 @@ iOS
 - SwiftUI
 - Xcode
 - CoreML / NaturalLanguage
-- Firebase / Firestore (Unidad 2)
+- Firebase / Firestore / Analytics / Remote Config
+- CryptoKit / Keychain / LocalAuthentication
+- Instruments / os_signpost (Unidad 3)
 
 ## Organización
 
@@ -21,6 +23,7 @@ La aplicación funciona como contenedor de las actividades del ramo. Al iniciar 
 - `App`: punto de entrada y selector de unidades.
 - `Unit1`: aplicación de Escuela de Danza desarrollada con MVVM, Repository y funcionamiento offline.
 - `Unit2`: microproyecto UNIACC Orienta, organizado con MVVM y Repository.
+- `Unit3`: evolución independiente de UNIACC Orienta orientada a optimización, seguridad, accesibilidad y medición.
 - `Training/Unit2`: datos y script utilizados para entrenar el clasificador de texto CoreML.
 - `Assets.xcassets`: recursos generales de la aplicación.
 
@@ -46,3 +49,23 @@ La integración se validó en iOS Simulator con Firebase Apple SDK 13.1.1:
 - lectura desde caché persistente de Firestore al perder conexión;
 - recuperación automática de la fuente cloud al restablecer la red;
 - respaldo local cuando la fuente remota no se encuentra disponible.
+
+
+## Unidad 3
+
+UNIACC Orienta Secure conserva el problema académico de la Unidad 2, pero mantiene una implementación independiente para poder comparar la evolución del microproyecto sin alterar la entrega anterior.
+
+La Unidad 3 incorpora:
+
+- servicios inicializados únicamente al entrar a la unidad;
+- clasificación CoreML y recursos Firestore con fallback local;
+- historial de consultas cifrado mediante AES-GCM;
+- clave simétrica persistida en Keychain;
+- desbloqueo mediante LocalAuthentication;
+- métricas de duración por operación y signposts compatibles con Instruments;
+- controles de accesibilidad, Dynamic Type y áreas táctiles adecuadas;
+- eventos de Firebase Analytics sin registrar el texto libre de las consultas;
+- variante de experiencia controlada mediante Firebase Remote Config;
+- pantalla de diagnóstico para apoyar la comparación de profiling antes/después.
+
+El historial protegido limita el almacenamiento a las consultas guardadas explícitamente por el usuario. El texto libre de la consulta no se envía a Analytics.
