@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct Unit3OrientationView: View {
-    @StateObject private var viewModel: Unit3OrientationViewModel
+    @ObservedObject private var viewModel: Unit3OrientationViewModel
     @State private var queryText = ""
     @FocusState private var queryFocused: Bool
 
@@ -12,7 +12,7 @@ struct Unit3OrientationView: View {
     ]
 
     init(viewModel: Unit3OrientationViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+        self.viewModel = viewModel
     }
 
     var body: some View {
