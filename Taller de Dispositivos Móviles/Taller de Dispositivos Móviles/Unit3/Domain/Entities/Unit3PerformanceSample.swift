@@ -1,6 +1,6 @@
 import Foundation
 
-enum Unit3PerformanceOperation: String, CaseIterable, Identifiable {
+enum Unit3PerformanceOperation: String, CaseIterable, Hashable, Identifiable {
     case orientation = "Orientación completa"
     case classification = "Clasificación CoreML"
     case resourceLoad = "Carga de recurso"
