@@ -93,22 +93,20 @@ final class EncryptedProtectedHistoryRepository: Unit3ProtectedHistoryRepository
             let key = try keyStore.loadOrCreateKey()
             let sealedBox = try AES.GCM.SealedBox(combined: encryptedData)
             let clearData = try AES.GCM.open(sealedBox, using: key)
+            let entries = try decoder.decode(
+                [ProtectedHistoryEntry].self,
+                from: clearData
+            )
 
-            if let object = try? JSONSerialization.jsonObject(with: clearData),
-               let formatted = try? JSONSerialization.data(
-                   withJSONObject: object,
-                   options: [.prettyPrinted, .sortedKeys]
-               ) {
-                decryptedJSON = String(
-                    data: formatted,
-                    encoding: .utf8
-                )
-            } else {
-                decryptedJSON = String(
-                    data: clearData,
-                    encoding: .utf8
-                )
-            }
+            let evidenceEncoder = JSONEncoder()
+            evidenceEncoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+            evidenceEncoder.dateEncodingStrategy = .iso8601
+
+            let formatted = try evidenceEncoder.encode(entries)
+            decryptedJSON = String(
+                data: formatted,
+                encoding: .utf8
+            )
         }
 
         return ProtectedHistoryTechnicalEvidence(
