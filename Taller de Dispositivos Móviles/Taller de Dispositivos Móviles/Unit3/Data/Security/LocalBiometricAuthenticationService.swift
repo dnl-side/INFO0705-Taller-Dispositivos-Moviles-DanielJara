@@ -53,18 +53,10 @@ final class LocalBiometricAuthenticationService: Unit3BiometricAuthenticating {
             throw LocalBiometricAuthenticationError.unavailable
         }
 
-        let success: Bool = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Bool, Error>) in
-            context.evaluatePolicy(
-                policy,
-                localizedReason: reason
-            ) { success, error in
-                if let error {
-                    continuation.resume(throwing: error)
-                } else {
-                    continuation.resume(returning: success)
-                }
-            }
-        }
+        let success = try await context.evaluatePolicy(
+            policy,
+            localizedReason: reason
+        )
 
         guard success else {
             throw LocalBiometricAuthenticationError.failed
