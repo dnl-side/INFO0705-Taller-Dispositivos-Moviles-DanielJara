@@ -57,7 +57,9 @@ Para obtener evidencia:
 5. Repetir la misma secuencia después de cada optimización.
 6. Comparar tiempos, CPU, memoria y actividad de red bajo condiciones equivalentes.
 
-La pantalla Diagnóstico y rendimiento muestra tiempos de sesión como apoyo visual. No sustituye las mediciones de Instruments.
+La pantalla Diagnóstico y rendimiento conserva localmente las 100 muestras más recientes en `Application Support/UNIACCOrientaSecure/performance-metrics.json`. El archivo se actualiza de forma atómica después de cada medición y se carga al iniciar la Unidad 3, por lo que los promedios sobreviven al reinicio de la aplicación.
+
+Este historial persistente sirve como apoyo visual y permite recalcular promedios a partir de muestras reales. No sustituye las mediciones de Instruments, que continúan siendo la evidencia principal para CPU, memoria y ejecución.
 
 ## Privacidad
 
