@@ -12,10 +12,10 @@ struct Unit3DiagnosticsView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Mediciones de sesión")
+                        Text("Historial de mediciones")
                             .font(.title2.bold())
 
-                        Text("Estos tiempos complementan el profiling. La evidencia principal de CPU, memoria y red se obtiene con Instruments mediante los signposts Unit3Operation.")
+                        Text("Las 100 muestras más recientes se conservan entre ejecuciones. Estos tiempos complementan el profiling de Instruments mediante los signposts Unit3Operation.")
                             .font(.subheadline)
                             .foregroundStyle(Unit3Theme.secondaryText)
                     }
@@ -51,7 +51,7 @@ struct Unit3DiagnosticsView: View {
                     .padding(16)
                     .background(Unit3Theme.surface, in: RoundedRectangle(cornerRadius: 18))
 
-                    Button("Limpiar mediciones de sesión") {
+                    Button("Eliminar historial de métricas") {
                         tracker.clear()
                     }
                     .buttonStyle(.bordered)
