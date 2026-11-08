@@ -28,9 +28,12 @@ final class LocalBiometricAuthenticationService: Unit3BiometricAuthenticating {
         }
 
         switch context.biometryType {
-        case .faceID: "Face ID"
-        case .touchID: "Touch ID"
-        default: "Biometría"
+        case .faceID:
+            return "Face ID"
+        case .touchID:
+            return "Touch ID"
+        default:
+            return "Biometría"
         }
     }
 
