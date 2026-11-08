@@ -7,6 +7,7 @@ final class ProtectedHistoryViewModel: ObservableObject {
     @Published private(set) var isUnlocked = false
     @Published private(set) var isAuthenticating = false
     @Published private(set) var errorMessage: String?
+    @Published private(set) var technicalEvidence: ProtectedHistoryTechnicalEvidence?
 
     private let historyRepository: Unit3ProtectedHistoryRepository
     private let biometricAuthenticator: Unit3BiometricAuthenticating
@@ -48,6 +49,9 @@ final class ProtectedHistoryViewModel: ObservableObject {
                 try historyRepository.entries()
             }
 
+            technicalEvidence = try historyRepository.technicalEvidence(
+                includeDecryptedContent: true
+            )
             isUnlocked = true
             analyticsTracker.track(.historyUnlocked, parameters: [:])
         } catch {
@@ -58,9 +62,12 @@ final class ProtectedHistoryViewModel: ObservableObject {
     }
 
     func refresh() {
-        guard isUnlocked else { return }
-
         do {
+            technicalEvidence = try historyRepository.technicalEvidence(
+                includeDecryptedContent: isUnlocked
+            )
+
+            guard isUnlocked else { return }
             entries = try historyRepository.entries()
         } catch {
             errorMessage = "No fue posible actualizar el historial."
@@ -73,6 +80,7 @@ final class ProtectedHistoryViewModel: ObservableObject {
         do {
             try historyRepository.removeAll()
             entries = []
+            technicalEvidence = nil
         } catch {
             errorMessage = "No fue posible eliminar el historial."
         }
@@ -82,5 +90,8 @@ final class ProtectedHistoryViewModel: ObservableObject {
         entries = []
         errorMessage = nil
         isUnlocked = false
+        technicalEvidence = try? historyRepository.technicalEvidence(
+            includeDecryptedContent: false
+        )
     }
 }
