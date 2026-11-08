@@ -12,7 +12,13 @@ final class Unit3PerformanceTracker: ObservableObject {
         category: "Unit3Performance"
     )
 
-    init(store: Unit3PerformanceStore = Unit3PerformanceStore()) {
+    init() {
+        let store = Unit3PerformanceStore()
+        self.store = store
+        samples = store.load()
+    }
+
+    init(store: Unit3PerformanceStore) {
         self.store = store
         samples = store.load()
     }
