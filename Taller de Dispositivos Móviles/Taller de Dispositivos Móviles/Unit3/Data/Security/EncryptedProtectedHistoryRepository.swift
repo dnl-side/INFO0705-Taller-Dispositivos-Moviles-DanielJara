@@ -11,6 +11,7 @@ final class EncryptedProtectedHistoryRepository: Unit3ProtectedHistoryRepository
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     private let maximumEntries = 20
+    private let evidencePreviewLimit = 280
 
     init(
         keyStore: KeychainSymmetricKeyStore = KeychainSymmetricKeyStore(),
@@ -67,6 +68,55 @@ final class EncryptedProtectedHistoryRepository: Unit3ProtectedHistoryRepository
     func removeAll() throws {
         guard FileManager.default.fileExists(atPath: fileURL.path) else { return }
         try FileManager.default.removeItem(at: fileURL)
+    }
+
+    func technicalEvidence(
+        includeDecryptedContent: Bool
+    ) throws -> ProtectedHistoryTechnicalEvidence? {
+        guard FileManager.default.fileExists(atPath: fileURL.path) else {
+            return nil
+        }
+
+        let encryptedData = try Data(contentsOf: fileURL)
+        guard !encryptedData.isEmpty else {
+            return nil
+        }
+
+        let encryptedBase64 = encryptedData.base64EncodedString()
+        let encryptedPreview = String(
+            encryptedBase64.prefix(evidencePreviewLimit)
+        )
+
+        var decryptedJSON: String?
+
+        if includeDecryptedContent {
+            let key = try keyStore.loadOrCreateKey()
+            let sealedBox = try AES.GCM.SealedBox(combined: encryptedData)
+            let clearData = try AES.GCM.open(sealedBox, using: key)
+
+            if let object = try? JSONSerialization.jsonObject(with: clearData),
+               let formatted = try? JSONSerialization.data(
+                   withJSONObject: object,
+                   options: [.prettyPrinted, .sortedKeys]
+               ) {
+                decryptedJSON = String(
+                    data: formatted,
+                    encoding: .utf8
+                )
+            } else {
+                decryptedJSON = String(
+                    data: clearData,
+                    encoding: .utf8
+                )
+            }
+        }
+
+        return ProtectedHistoryTechnicalEvidence(
+            algorithm: "AES-GCM · clave de 256 bits en Keychain",
+            encryptedByteCount: encryptedData.count,
+            encryptedBase64: encryptedPreview,
+            decryptedJSON: decryptedJSON
+        )
     }
 
     private func persist(_ entries: [ProtectedHistoryEntry]) throws {
