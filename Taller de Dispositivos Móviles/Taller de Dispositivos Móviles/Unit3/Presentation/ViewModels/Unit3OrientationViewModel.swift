@@ -196,10 +196,13 @@ final class Unit3OrientationViewModel: ObservableObject {
             ]
         )
 
-        if loadResult.source == .cache {
+        if loadResult.source == .cache || loadResult.source == .sessionCache {
             analyticsTracker.track(
                 .cacheUsed,
-                parameters: ["category": category.rawValue]
+                parameters: [
+                    "category": category.rawValue,
+                    "source": loadResult.source.rawValue
+                ]
             )
         }
 
