@@ -43,7 +43,7 @@ final class FirebaseUnit3ExperimentService: Unit3ExperimentProviding {
     private func updateCurrentVariant() {
         let value = remoteConfig
             .configValue(forKey: "unit3_low_confidence_variant")
-            .stringValue ?? Unit3ExperimentVariant.focused.rawValue
+            .stringValue
 
         currentVariant = Unit3ExperimentVariant(rawValue: value) ?? .focused
     }
