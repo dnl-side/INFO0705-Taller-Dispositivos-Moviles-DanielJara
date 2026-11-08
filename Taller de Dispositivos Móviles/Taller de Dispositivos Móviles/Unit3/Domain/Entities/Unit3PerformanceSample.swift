@@ -1,6 +1,6 @@
 import Foundation
 
-enum Unit3PerformanceOperation: String, CaseIterable, Hashable, Identifiable {
+enum Unit3PerformanceOperation: String, CaseIterable, Codable, Hashable, Identifiable {
     case orientation = "Orientación completa"
     case classification = "Clasificación CoreML"
     case resourceLoad = "Carga de recurso"
@@ -10,7 +10,7 @@ enum Unit3PerformanceOperation: String, CaseIterable, Hashable, Identifiable {
     var id: String { rawValue }
 }
 
-struct Unit3PerformanceSample: Identifiable, Equatable {
+struct Unit3PerformanceSample: Codable, Identifiable, Equatable {
     let id: UUID
     let operation: Unit3PerformanceOperation
     let durationMilliseconds: Double
