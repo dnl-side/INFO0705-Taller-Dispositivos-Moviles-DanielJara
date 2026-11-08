@@ -4,12 +4,18 @@ import os
 
 @MainActor
 final class Unit3PerformanceTracker: ObservableObject {
-    @Published private(set) var samples: [Unit3PerformanceSample] = []
+    @Published private(set) var samples: [Unit3PerformanceSample]
 
+    private let store: Unit3PerformanceStore
     private let log = OSLog(
         subsystem: "cl.uniacc.orienta",
         category: "Unit3Performance"
     )
+
+    init(store: Unit3PerformanceStore = Unit3PerformanceStore()) {
+        self.store = store
+        samples = store.load()
+    }
 
     func measure<T>(
         _ operation: Unit3PerformanceOperation,
@@ -52,6 +58,7 @@ final class Unit3PerformanceTracker: ObservableObject {
 
     func clear() {
         samples.removeAll()
+        try? store.clear()
     }
 
     private func finish(
@@ -73,6 +80,8 @@ final class Unit3PerformanceTracker: ObservableObject {
         if samples.count > 100 {
             samples = Array(samples.prefix(100))
         }
+
+        try? store.save(samples)
 
         os_signpost(
             .end,
