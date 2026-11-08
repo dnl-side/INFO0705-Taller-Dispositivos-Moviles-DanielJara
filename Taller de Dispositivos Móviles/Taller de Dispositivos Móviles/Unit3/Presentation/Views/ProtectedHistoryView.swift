@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct ProtectedHistoryView: View {
-    @StateObject private var viewModel: ProtectedHistoryViewModel
+    @ObservedObject private var viewModel: ProtectedHistoryViewModel
     @State private var confirmDeletion = false
 
     init(viewModel: ProtectedHistoryViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+        self.viewModel = viewModel
     }
 
     var body: some View {
