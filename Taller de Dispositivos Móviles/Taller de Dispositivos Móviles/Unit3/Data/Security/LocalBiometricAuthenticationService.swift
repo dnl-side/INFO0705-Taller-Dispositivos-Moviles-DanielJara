@@ -30,7 +30,6 @@ final class LocalBiometricAuthenticationService: Unit3BiometricAuthenticating {
         switch context.biometryType {
         case .faceID: "Face ID"
         case .touchID: "Touch ID"
-        case .opticID: "Optic ID"
         default: "Biometría"
         }
     }
