@@ -74,9 +74,14 @@ struct ProtectedHistoryView: View {
                     .font(.caption)
                     .foregroundStyle(Unit3Theme.warning)
             }
+
+            technicalEvidenceSection
         }
         .padding(24)
         .frame(maxWidth: 520)
+        .onAppear {
+            viewModel.refresh()
+        }
     }
 
     private var unlockedContent: some View {
@@ -133,6 +138,8 @@ struct ProtectedHistoryView: View {
                         )
                     }
 
+                    technicalEvidenceSection
+
                     Button(role: .destructive) {
                         confirmDeletion = true
                     } label: {
@@ -146,6 +153,80 @@ struct ProtectedHistoryView: View {
         }
         .onAppear {
             viewModel.refresh()
+        }
+    }
+
+    @ViewBuilder
+    private var technicalEvidenceSection: some View {
+        if let evidence = viewModel.technicalEvidence {
+            VStack(alignment: .leading, spacing: 12) {
+                Label("Evidencia técnica del cifrado", systemImage: "checkmark.shield")
+                    .font(.headline)
+                    .foregroundStyle(Unit3Theme.security)
+
+                Text(evidence.algorithm)
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(Unit3Theme.secondaryText)
+
+                HStack {
+                    Text("Archivo cifrado")
+                    Spacer()
+                    Text("\(evidence.encryptedByteCount) bytes")
+                }
+                .font(.caption)
+
+                Text("Contenido almacenado · Base64 (vista parcial)")
+                    .font(.caption.bold())
+                    .foregroundStyle(Unit3Theme.secondaryText)
+
+                Text(evidence.encryptedBase64)
+                    .font(.caption.monospaced())
+                    .textSelection(.enabled)
+                    .padding(10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        Unit3Theme.background,
+                        in: RoundedRectangle(cornerRadius: 12)
+                    )
+                    .accessibilityLabel("Vista parcial del contenido cifrado en Base64.")
+
+                Text("La clave de cifrado permanece en Keychain y no se muestra.")
+                    .font(.caption2)
+                    .foregroundStyle(Unit3Theme.secondaryText)
+
+                if let decryptedJSON = evidence.decryptedJSON {
+                    Divider()
+
+                    Text("Contenido descifrado después de autenticar")
+                        .font(.caption.bold())
+                        .foregroundStyle(Unit3Theme.secondaryText)
+
+                    Text(decryptedJSON)
+                        .font(.caption.monospaced())
+                        .textSelection(.enabled)
+                        .padding(10)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(
+                            Unit3Theme.security.opacity(0.06),
+                            in: RoundedRectangle(cornerRadius: 12)
+                        )
+                        .accessibilityLabel("Contenido descifrado del historial.")
+                } else {
+                    Text("Autentícate para visualizar la representación descifrada.")
+                        .font(.caption)
+                        .foregroundStyle(Unit3Theme.secondaryText)
+                }
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                Unit3Theme.surface,
+                in: RoundedRectangle(cornerRadius: 18)
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: 18)
+                    .stroke(Unit3Theme.security.opacity(0.18), lineWidth: 1)
+            }
         }
     }
 }
