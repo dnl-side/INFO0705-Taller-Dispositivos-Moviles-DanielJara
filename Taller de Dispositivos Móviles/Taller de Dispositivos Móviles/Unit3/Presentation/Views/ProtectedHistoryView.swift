@@ -35,7 +35,8 @@ struct ProtectedHistoryView: View {
     }
 
     private var lockedContent: some View {
-        VStack(spacing: 18) {
+        ScrollView {
+            VStack(spacing: 18) {
             Image(systemName: "lock.shield.fill")
                 .font(.system(size: 58))
                 .foregroundStyle(Unit3Theme.security)
@@ -75,10 +76,12 @@ struct ProtectedHistoryView: View {
                     .foregroundStyle(Unit3Theme.warning)
             }
 
-            technicalEvidenceSection
+                technicalEvidenceSection
+            }
+            .padding(24)
+            .frame(maxWidth: 520)
+            .frame(maxWidth: .infinity)
         }
-        .padding(24)
-        .frame(maxWidth: 520)
         .onAppear {
             viewModel.refresh()
         }
