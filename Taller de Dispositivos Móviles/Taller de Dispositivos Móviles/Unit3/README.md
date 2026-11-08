@@ -20,10 +20,11 @@ La Unidad 3 conserva el problema de orientación académica trabajado en la Unid
 2. Los servicios de la unidad se crean en ese momento, no al iniciar la aplicación.
 3. La consulta se clasifica localmente con CoreML V4.
 4. El recurso se obtiene desde Firestore, caché o respaldo local.
-5. El usuario puede guardar la consulta de forma explícita.
-6. El historial se serializa, cifra con AES-GCM y persiste localmente.
-7. La clave AES se conserva en Keychain.
-8. Para visualizar el historial se solicita autenticación del dispositivo.
+5. Los recursos consultados se conservan durante 5 minutos en caché de sesión para reducir lecturas repetidas.
+6. El usuario puede guardar la consulta de forma explícita.
+7. El historial se serializa, cifra con AES-GCM y persiste localmente.
+8. La clave AES se conserva en Keychain.
+9. Para visualizar el historial se solicita autenticación del dispositivo.
 
 ## Prueba biométrica en Simulator
 
